@@ -17,7 +17,7 @@ def run_bot():
     drop_tire()
     end = True
     while end:
-        drive_obj.on_for_degrees(SpeedPercent(75), SpeedPercent(75), 45)
+        drive_obj.on_for_degrees(0, SpeedPercent(30), 90)
         if cs.color == 6:
             end = False
 
