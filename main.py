@@ -13,6 +13,7 @@ def run_bot():
 
     drive_obj = MoveTank(OUTPUT_B, OUTPUT_C)
     cs = ColorSensor()
+    cs.mode = 'COL-COLOR'
     drop_tire()
     end = True
     while end:
