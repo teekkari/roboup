@@ -6,19 +6,17 @@ from time import sleep
 
 class LineFollower:
     # Constructor
-    def __init__(self, color):
+    def __init__(self):
         self.btn = Button()
         self.shut_down = False
 
     # Main method
-    def run(self, target_color, color_to_follow):
+    def run(self, color_to_follow):
 
         # sensors
         cs = ColorSensor()
-        us = UltrasonicSensor()
 
         cs.mode = 'COL-REFLECT'  # measure light intensity
-        us.mode = 'US-DIST-CM'   # measure distance in cm
 
         # motors
         lm = LargeMotor('outB')
