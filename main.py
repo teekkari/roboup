@@ -15,11 +15,12 @@ def run_bot():
 
     drive_obj = MoveTank(OUTPUT_B, OUTPUT_C)
     cs = ColorSensor()
+    cs.mode = 'COL-COLOR'
     drop_tire()
     end = True
     while end:
-        drive_obj.on_for_degrees(SpeedPercent(75), SpeedPercent(75), 1)
-        if cs.color() == 6:
+        drive_obj.on_for_degrees(0, SpeedPercent(30), 90)
+        if cs.color == 6:
             end = False
 
 if __name__ == "__main__":
