@@ -18,7 +18,7 @@ class LineFollower():
     def run(self):
         dt = 500
         stop_action = "coast"
-        speed = 360/4
+        speed = 360/2
 
         cs = ColorSensor()
         cs.mode = 'COL-REFLECT'
@@ -44,9 +44,7 @@ class LineFollower():
         while not self.end:
             measured_value = cs.value()
             
-
             error = measured_value - target_value
-            print(error)
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
@@ -60,25 +58,21 @@ class LineFollower():
                     u = 1000 - speed
                 else:
                     u = speed - 1000
+            
 
+            print(u)
             if u < 0:
-                lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
                 last_turn = 0
                 sleep(dt / 2000)
             else:
-                lm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
                 last_turn = 1
                 sleep(dt / 2000)
-            
-             
-            
+        
             previous_error = error
-            count += 1
-
-            if count > 200:
-                self.shut_down = True
 
 
 lineFollower = LineFollower(28, 18, 62)
