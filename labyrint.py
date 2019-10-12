@@ -54,6 +54,8 @@ class LineFollower():
             else:
                 u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
 
+            print(error)
+            print(u)
             if speed + abs(u) > 1000:
                 if u >= 0:
                     u = 1000 - speed
