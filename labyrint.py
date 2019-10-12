@@ -2,6 +2,8 @@ from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_C, OUTPU
 from ev3dev2.motor import MoveDifferential
 from ev3dev2.sensor.lego import ColorSensor
 from time import sleep
+from move import Driver
+from distance_utils import IRUtils
 
 lm = LargeMotor(OUTPUT_B)
 rm = LargeMotor(OUTPUT_C)
@@ -81,7 +83,7 @@ class LineFollower():
 
 
             found_white = False
-            count = 15
+            count = 25
 
             while not found_white:
                 left_number = 0
@@ -106,6 +108,21 @@ class LineFollower():
 
                 turn *= -1
 
+
+
+start_dist = IRUtils().get_distance_cm()
+
+cs = ColorSensor()
+driver = Driver()
+driver.set_speed(600)
+
+
+
+found_color = False
+while not found_color:
+    
+    if cs.color() == 6:
+        break
 
 lineFollower = LineFollower(60, 20, 90)
 lineFollower.run()
