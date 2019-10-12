@@ -47,39 +47,81 @@ class LineFollower():
         while not self.end:
             measured_value = cs.value()
             
-            error = measured_value - target_value
-            print(error)
-            print(error > 0)
-            integral += (error * dt)
-            derivative = (error - previous_error) / dt
+            color = 6
 
-            if error < 0:
-                u = (Kp * factor * factor_negative * turn_speed * error) + (Ki * integral) + (Kd * derivative)
-            else:
-                u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
+            while color == 6:
+                error = measured_value - target_value
+                print(error)
+                print(error > 0)
+                integral += (error * dt)
+                derivative = (error - previous_error) / dt
 
-
-            if speed + pow(abs(u),2) > 1000:
-                if u >= 0:
-                    u = 1000 - speed
+                if error < 0:
+                    u = (Kp * factor * factor_negative * error) + (Ki * integral) + (Kd * derivative)
                 else:
-                    u = speed - 1000
+                    u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
+                
+
+
+                if speed + pow(abs(u),2) > 1000:
+                    if u >= 0:
+                        u = 1000 - speed
+                    else:
+                        u = speed - 1000
+
+                if u < 0:
+                    lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
+                    last_turn = 0
+                    sleep(dt / 2000)
+                else:
+                    lm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
+                    last_turn = 1
+                    sleep(dt / 2000)
+
+                color = cs.color
+                previous_error = error
+
+
+            found_white = False
+            count = 4
+            while not found_white:
+                left = False
+                left_number = 0
+                count *= 2.5
+
+                while not left and not found_white:
+
+                    lm.run_timed(time_sp=dt, speed_sp=-70, stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp=70, stop_action=stop_action)
+
+                    if cs.color == 6:
+                        found_white = True
+
+                    if left_number >= count:
+                        break
+                    
+                    left_number += 1
+                    
+                right = False
+                right_number = 0
+                count *= 2.5
+
+                while not right and not found_white:
+
+                    lm.run_timed(time_sp=dt, speed_sp=70, stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp=-70, stop_action=stop_action)
+
+                    if cs.color == 6:
+                        found_white = True
+
+                    if right_number >= count:
+                        break
+
+                    right_number += 1
 
             
-
-            print(u)
-            if u < 0:
-                lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
-                last_turn = 0
-                sleep(dt / 2000)
-            else:
-                lm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
-                last_turn = 1
-                sleep(dt / 2000)
-        
-            previous_error = error
 
 
 lineFollower = LineFollower(60, 20, 90)
