@@ -56,7 +56,7 @@ class Bot:
 
                 if d == 0: # bump
                     break
-                elif abs(d) > (target_dist + 10): # gap encountered
+                elif abs(d) > (target_dist + 20): # gap encountered
                     break
 
                 self.driver.stop()

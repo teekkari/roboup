@@ -20,7 +20,11 @@ class IRUtils:
         MAX_DIST = 70
         dist = self.ir.proximity / 100.0 * MAX_DIST
         #print(" {:.2f} cm".format(dist))
-        return dist
+        return dist / 2
+
+
+    def get_ir_value(self):
+        return self.ir.value()
 
     def get_distance_per(self):
         return self.ir.proximity
@@ -33,8 +37,8 @@ class IRUtils:
     # 0 = bumped
     def hold_distance(self, target_distance, sensorOnRightSide):
 
-        ERR_MARGIN = 4 # cm
-        TURN_CONST = 0.5
+        ERR_MARGIN = 5 # cm
+        TURN_CONST = 1
 
         while self.ts.is_pressed == 0:
             dist = self.get_distance_cm()
@@ -45,7 +49,8 @@ class IRUtils:
                 # time.sleep(0.005) #5ms
                 continue
 
-            print("delta:", delta)
+            print("delta:", delta, "ts:", self.ts.is_pressed)
+            
 
             if sensorOnRightSide:
                 return delta*TURN_CONST
@@ -63,7 +68,7 @@ class IRUtils:
         return delta*TURN_CONST
 
     def find_target_distance(self, target_distance):
-        ERR_MARGIN = 2 #cm
+        ERR_MARGIN = 10 #cm
 
         while abs(self.get_distance_cm() - target_distance) > ERR_MARGIN:
             continue
