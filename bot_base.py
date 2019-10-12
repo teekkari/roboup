@@ -64,6 +64,7 @@ class Bot:
 
                     d = self.irutils.distance_delta(target_dist)
 
+                print("move")
                 self.driver.move()
                 time.sleep(1)
 
