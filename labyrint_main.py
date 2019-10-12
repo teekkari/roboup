@@ -101,14 +101,14 @@ class LineFollower():
 
 
             found_white = False
-            count = 25
+            count = 20
 
             while not found_white:
                 left_number = 0
                 count *= 2.5
 
                 while not found_white:
-                    
+
                     if cs.color == target_color:
                         break
 

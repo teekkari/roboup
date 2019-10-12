@@ -23,7 +23,7 @@ while True:
     print(distance_from_wall)
 
     if distance_from_wall < safe_threshold:
-        driver.turn_degrees(20)
+        driver.turn_degrees(15)
         driver.move_seconds(0.5)
         driver.move()
 
