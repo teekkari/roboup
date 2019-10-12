@@ -31,7 +31,7 @@ class Remote():
             self.now = time.time()
             self.drive.move()
         else:
-            self.ghost.append(('forward', time.time() - self.now + 0.2))
+            self.ghost.append(('forward', time.time() - self.now))
             self.drive.stop()
 
     def bot_left_channel_1_action(self, state):
@@ -40,7 +40,7 @@ class Remote():
             self.now = time.time()
             self.drive.reverse()
         else:
-            self.ghost.append(('backward', time.time() - self.now + 0.2))
+            self.ghost.append(('backward', time.time() - self.now))
             self.drive.stop()
 
     def top_right_channel_1_action(self, state):
@@ -49,7 +49,7 @@ class Remote():
             self.now = time.time()
             self.drive.turn(100)
         else:
-            self.ghost.append(('right', time.time() - self.now + 0.2))
+            self.ghost.append(('right', time.time() - self.now))
             self.drive.stop()
 
     def bot_right_channel_1_action(self, state):
@@ -58,7 +58,7 @@ class Remote():
             self.now = time.time()
             self.drive.turn(-100)
         else:
-            self.ghost.append(('left', time.time() - self.now+ 0.2))
+            self.ghost.append(('left', time.time() - self.now))
             self.drive.stop()
 
     def remote(self):
