@@ -20,7 +20,7 @@ class IRUtils:
         MAX_DIST = 70
         dist = self.ir.proximity / 100.0 * MAX_DIST
         #print(" {:.2f} cm".format(dist))
-        return dist
+        return dist / 2
 
     def get_distance_per(self):
         return self.ir.proximity
