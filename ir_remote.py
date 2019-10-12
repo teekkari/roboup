@@ -1,4 +1,3 @@
-from ev3dev2.motor import Motor, OUTPUT_B, OUTPUT_C, MoveTank, SpeedPercent
 from ev3dev2.sensor.lego import InfraredSensor
 from move import Driver
 
@@ -15,11 +14,13 @@ class Remote():
         self.ir.on_channel1_bottom_right = bot_right_channel_1_action
 
     def beacon_channel_1_action(self, state):
+        print(self.ir.beacon())
         if state:
             print("Beacon pressed, now stopping")
             self.drive.stop()
 
     def top_left_channel_1_action(self, state):
+        print(self.ir.top_left())
         if state:
             self.drive.move()
             print("forward")
@@ -27,6 +28,7 @@ class Remote():
             self.drive.stop()
 
     def bot_left_channel_1_action(self, state):
+        print(self.ir.bottom_left())
         if state:
             self.drive.reverse()
             print("backward")
@@ -34,6 +36,7 @@ class Remote():
             self.drive.stop()
 
     def top_right_channel_1_action(self, state):
+        print(self.ir.top_right())
         if state:
             self.drive.turn(50)
             print("right")
@@ -41,6 +44,7 @@ class Remote():
             self.drive.stop()
 
     def bot_right_channel_1_action(self, state):
+        print(self.ir.bottom_right())
         if state:
             self.drive.turn(-50)
             print("left")
