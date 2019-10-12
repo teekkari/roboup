@@ -15,11 +15,15 @@ class Driver:
         self.driver.on(0, SpeedPercent(self.speed))
 
     def move_cm(self, cm):
-        ROT_CONST = 1.0
-        self.driver.on_for_rotations(0, SpeedPercent(self.speed), cm * ROT_CONST)
+        ROT_CONST = 5.0
+        self.driver.on_for_degrees(0, SpeedPercent(self.speed), cm * ROT_CONST)
 
     def reverse(self):
         self.driver.on(0, SpeedPercent(-self.speed))
+
+    def reverse_cm(self, cm):
+        TRANSFORM_CONST = 5.0
+        self.driver.on_for_degrees(0, SpeedPercent(-self.speed), cm*TRANSFORM_CONST)
 
     def stop(self):
         self.driver.off()
