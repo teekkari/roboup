@@ -32,6 +32,8 @@ class Bot:
         #self.ts = TouchSensor()
         self.cs = ColorSensor()
 
+        self.IRSensorsOnRightSide = IRSensorsOnRightSide
+
 
     def parse_move(self, move):
         args = move.split(" ")
@@ -52,7 +54,7 @@ class Bot:
 
             while True:
                 self.driver.move()
-                d = self.irutils.hold_distance(target_dist)
+                d = self.irutils.hold_distance(target_dist, self.IRSensorsOnRightSide)
 
                 if d == 0: # bump
                     break
