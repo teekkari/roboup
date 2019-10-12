@@ -4,7 +4,7 @@ from bot_base import Bot
 if __name__=="__main__":
     ir = IRUtils()
 
-    bot = Bot()
+    bot = Bot(False)
 
     bot.seek_wall_parallel()
 
