@@ -109,7 +109,7 @@ class LineFollower():
 
 
             found_white = False
-            count = 20
+            count = 22
 
             while not found_white:
                 left_number = 0
@@ -132,6 +132,8 @@ class LineFollower():
                     
                     left_number += 1
 
-                turn *= -1
+                if count > 200:
 
-                break
+                    print("jees")
+
+                turn *= -1
