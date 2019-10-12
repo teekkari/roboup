@@ -8,15 +8,9 @@ if __name__=="__main__":
 
     bot = Bot(False)
 
-    bot.driver.move()
+    bot.driver.turn_degrees(45)
 
-    time.sleep(2)
-
-    bot.driver.move()
-
-    time.sleep(3)
-
-    bot.driver.stop()
+    bot.driver.turn_degrees(-90)
 
 
     #bot.seek_wall_parallel()
