@@ -9,8 +9,17 @@ from drop_dens import drop_dens
 from ir_remote import remote
 from linereader import LineFollower
 
+from distance_utils import IRUtils
+
 
 def run_bot():
+
+    iru = IRUtils
+
+    while True:
+        iru.get_distance_cm
+
+    return
 
     LineFollower.run()
 
