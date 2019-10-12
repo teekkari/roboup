@@ -63,7 +63,7 @@ class LineFollower():
                 
 
 
-                if speed + pow(abs(u),2) > 1000:
+                if speed + abs(u) > 1000:
                     if u >= 0:
                         u = 1000 - speed
                     else:
@@ -73,12 +73,10 @@ class LineFollower():
                 if u < 0:
                     lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
-                    last_turn = 0
                     sleep(dt / 2000)
                 else:
                     lm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
-                    last_turn = 1
                     sleep(dt / 2000)
 
                 color = cs.color
@@ -86,17 +84,13 @@ class LineFollower():
 
 
             found_white = False
-            count = 15  
-
-            # if white was on left it is -1 
-
+            count = 15
 
             while not found_white:
-                left = False
                 left_number = 0
                 count *= 2.5
 
-                while not left and not found_white:
+                while not found_white:
 
                     lm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)

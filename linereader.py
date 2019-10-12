@@ -1,4 +1,4 @@
-from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent
+from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_B, OUTPUT_C
 from ev3dev2.sensor.lego import ColorSensor, UltrasonicSensor
 from ev3dev2.button import Button
 
@@ -11,7 +11,7 @@ class LineFollower:
         self.shut_down = False
 
     # Main method
-    def run(self, color_to_follow):
+    def run(self, color_to_follow, target_color):
 
         # sensors
         cs = ColorSensor()
@@ -19,12 +19,13 @@ class LineFollower:
         cs.mode = 'COL-REFLECT'  # measure light intensity
 
         # motors
-        lm = LargeMotor('outB')
-        rm = LargeMotor('outC')
+        lm = LargeMotor(OUTPUT_B)
+        rm = LargeMotor(OUTPUT_C)
 
         speed = 360/4  # deg/sec, [-1000, 1000]
         dt = 500       # milliseconds
         stop_action = "coast"
+
 
         # PID tuning
         Kp = 1  # proportional gain
@@ -37,11 +38,17 @@ class LineFollower:
         # initial measurmentt
         target_value = color_to_follow
 
+        target_color = cs.color()
+
         # Start the main loop
         while not self.shut_down:
+            measured_value = cs.value()
 
+
+            color = cs.color()
             # Calculate steering using PID algorithm
-            error = target_value - cs.value()
+
+            error = target_value - measured_value
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
@@ -71,6 +78,7 @@ class LineFollower:
             previous_error = error
 
             measure = cs.color()
+            
             if measure == target_color:
                 lm.run_timed(time_sp=2000, speed_sp=600, stop_action=stop_action)
                 self.shut_down = True
