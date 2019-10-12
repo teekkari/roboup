@@ -30,13 +30,13 @@ while True:
         lm = LargeMotor(OUTPUT_B)
         rm = LargeMotor(OUTPUT_C)
 
-        lm.on(300)
-        rm.on(250)
+        lm.on(30)
+        rm.on(25)
         
     if distance_from_wall > max_distance:
 
-        lm.on(250)
-        rm.on(300)
+        lm.on(25)
+        rm.on(30)
 
     if cs.color == 6:
         break
