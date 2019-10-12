@@ -116,12 +116,12 @@ cs = ColorSensor()
 driver = Driver()
 driver.set_speed(600)
 
-
+driver.move()
 
 found_color = False
 while not found_color:
     
-    if cs.color() == 6:
+    if cs.color == 6:
         break
 
 lineFollower = LineFollower(60, 20, 90)
