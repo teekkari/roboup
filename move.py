@@ -45,7 +45,7 @@ class Driver:
 
     def turn_degrees(self, degrees):
         TRANSFORM_CONST = 4.4
-        self.driver.on_for_degrees(steering, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
+        self.driver.on_for_degrees(100, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
 
     def turn_neg_degrees(self, degrees):
         TRANSFORM_CONST = 4.4
