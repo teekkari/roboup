@@ -55,12 +55,12 @@ class Bot:
 
                     print(d, "d")
 
-                    self.driver.turn_degrees(int(d/2))
-                    time.sleep(0.2)
-                    self.driver.move_cm(3)
+                    self.driver.turn_degrees(int(d))
                     time.sleep(0.5)
-                    self.driver.turn_degrees(-int(d/2))
-                    time.sleep(0.2)
+                    self.driver.move_cm(3)
+                    time.sleep(1)
+                    self.driver.turn_degrees(-int(d))
+                    time.sleep(0.5)
 
                     d = self.irutils.distance_delta(target_dist)
 
