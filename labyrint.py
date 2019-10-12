@@ -48,6 +48,8 @@ class LineFollower():
             measured_value = cs.value()
             
             error = measured_value - target_value
+            print(error)
+            print(error > 0)
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
@@ -57,7 +59,7 @@ class LineFollower():
                 u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
 
 
-            if speed + abs(u) > 1000:
+            if speed + pow(abs(u),2) > 1000:
                 if u >= 0:
                     u = 1000 - speed
                 else:
