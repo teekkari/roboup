@@ -72,7 +72,8 @@ class Bot:
                 if args[2] == "color":
                     self.driver.move()
                     while self.cs.color != int(args[3]):
-                        time.sleep(0.01) #10ms
+                        #time.sleep(0.01) #10ms
+                        pass
                     self.driver.stop()
                     pass # color sensor color int(args[3])
                 elif args[2] == "wall":

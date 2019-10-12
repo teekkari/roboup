@@ -34,15 +34,15 @@ class IRUtils:
     def hold_distance(self, target_distance, sensorOnRightSide):
 
         ERR_MARGIN = 4 # cm
-        TURN_CONST = 5
+        TURN_CONST = 2
 
-        while not self.ts.is_pressed:
+        while self.ts.is_pressed == 0:
             dist = self.get_distance_cm()
             delta = dist - target_distance
 
             # do nothing if we havent passed error threshold
             if abs(delta) < ERR_MARGIN or delta == 0.0:
-                time.sleep(0.005) #5ms
+                # time.sleep(0.005) #5ms
                 continue
 
             if sensorOnRightSide:
@@ -54,7 +54,7 @@ class IRUtils:
 
 
     def get_turn_from_dist(self, target_distance):
-        TURN_CONST = 5
+        TURN_CONST = 2
         dist = self.get_distance_cm()
         delta = dist - target_distance
 
