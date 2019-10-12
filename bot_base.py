@@ -15,6 +15,7 @@ import time
 #       finish
 # reverse
 #   int(cm_dist)
+# stop [tops all movement]
 # find [moves forward until]
 #   int(cm_dist_from_wall)
 # hold [hugs the wall with dist]
@@ -24,32 +25,10 @@ import time
 class Bot:
 
     def __init__(self):
-
-        self.moveset = [
-            "forward for 30",
-            "turn -20",
-            "find 5",
-            "hold 5",
-            "reverse 30",
-            "turn 90",
-            "forward until color 6", #foward until color 6 white
-            "dropdens",
-            "turn 90",
-            "sleep 5"
-            "forward until wall", # forward until wall
-            "turn -90"
-            "forward until finish" #forward until finish
-        ]
-
         self.driver = Driver()
         self.irutils = IRUtils()
         self.ts = TouchSensor()
         self.cs = ColorSensor()
-
-
-    def run(self):
-        for move in self.moveset:
-            self.parse_move(move)
 
 
     def parse_move(self, move):
@@ -61,6 +40,8 @@ class Bot:
             self.driver.stop()
         elif args[0] == "sleep":
             time.sleep(int(args[1]))
+        elif args[0] == "stop":
+            self.driver.stop()
         elif args[0] == "hold":
             target_dist = int(args[1])
 
