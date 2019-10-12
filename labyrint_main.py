@@ -39,7 +39,8 @@ class LineFollower():
 
             if cs.color == 6:
                 break
-        
+    
+
     def run(self, target_color):
         lm = self.lm
         rm = self.rm
