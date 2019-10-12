@@ -24,7 +24,6 @@ while True:
 
     if distance_from_wall < safe_threshold:
         driver.turn_degrees(15)
-        driver.move_seconds(0.5)
         driver.move()
 
     if cs.color == 6:
