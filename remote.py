@@ -1,6 +1,6 @@
 from ev3dev2.sensor.lego import InfraredSensor
 from move import Driver
-import argparse
+import sys
 import time
 import pickle
 
@@ -14,20 +14,9 @@ class Remote():
         self.ir.on_channel1_bottom_left = self.bot_left_channel_1_action
         self.ir.on_channel1_top_right = self.top_right_channel_1_action
         self.ir.on_channel1_bottom_right = self.bot_right_channel_1_action
-        self.name = self.parse_args()
+        self.name = sys.argv[1]
         self.ghost = []
         self.now = 0
-
-    def parse_args(self):
-        parser = argparse.ArgumentParser(description='Enter filename for recording')
-        parser.add_argument('-n', help='Enter filename for the track')
-        args = parser.args
-        print(args)
-        if not args:
-            raise Exception("Please enter filename after -n argument")
-        return args
-
-
 
     def beacon_channel_1_action(self, state):
         print(self.ir.beacon())
