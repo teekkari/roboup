@@ -18,3 +18,6 @@ class Driver:
 
     def turn(self, steering):
         self.driver.on(steering, self.speed)
+
+    def turn_rotations(self, steering, rotations):
+        self.driver.on_for_rotations(steering, SpeedPercent(self.speed), rotations)
