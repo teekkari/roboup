@@ -39,7 +39,7 @@ class LineFollower():
         factor_positive = (self.too_light - self.correct_value) / 100
         factor = (self.too_light - self.correct_value) / (self.correct_value - self.too_dark)
 
-        turn_speed = 400
+        turn_speed = 200
 
         # if value is 0 turned to left last
         last_turn = 1
