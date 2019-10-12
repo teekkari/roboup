@@ -1,6 +1,5 @@
 from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_B, OUTPUT_C, MoveSteering
 from ev3dev2.sensor.lego import ColorSensor, UltrasonicSensor
-from ev3dev2.button import Button
 
 from time import sleep
 
@@ -18,8 +17,8 @@ class LineFollower:
         cs.mode = 'COL-REFLECT'  # measure light intensity
 
         # motors
-        lm = LargeMotor('outB')
-        rm = LargeMotor('outC')
+        lm = LargeMotor('outC')
+        rm = LargeMotor('outB')
 
         speed = 360/2  # deg/sec, [-1000, 1000]
         dt = 500       # milliseconds
@@ -34,7 +33,7 @@ class LineFollower:
         previous_error = 0
 
         # initial measurment
-        target_value = 30
+        target_value = 35
 
         # Start the main loop
         while not self.shut_down:
@@ -62,14 +61,14 @@ class LineFollower:
                     u = speed - 1000
 
             # run motors
-            if u < 0:
+            if u >= 0:
                 lm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
                 rm.run_timed(time_sp=dt, speed_sp=0, stop_action=stop_action)
-                sleep(dt / 1000)
+                sleep(dt / 2000)
             else:
                 lm.run_timed(time_sp=dt, speed_sp=0, stop_action=stop_action)
                 rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
-                sleep(dt / 1000)
+                sleep(dt / 2000)
 
             previous_error = error
 
