@@ -16,15 +16,15 @@ class Spin():
 
             self.drive.set_speed(90)
             print("set speed, 90")
-            time = time.time()
+            now = time.time()
 
             
-            while time.time() - time < 10:
+            while time.time() - now < 10:
                 self.drive.turn(-20)
             print("Turned left for 10s")
             self.drive.set_speed(50)
             print("Set speed, 50")
-            while sensor.color != 6:
+            while self.sensor.color != 6:
                 self.drive.turn(10)
                 time.sleep(2)
                 self.drive.stop()
