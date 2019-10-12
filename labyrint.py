@@ -6,9 +6,7 @@ from move import Driver
 from distance_utils import IRUtils
 
 lm = LargeMotor(OUTPUT_B)
-rm = LargeMotor(OUTPUT_C)
-
-drive_obj = MoveTank(OUTPUT_B, OUTPUT_C)    
+rm = LargeMotor(OUTPUT_C)   
 
 class LineFollower():
     def __init__(self, correct_value, too_dark, too_light):
@@ -114,17 +112,25 @@ class LineFollower():
 
 
 
-start_dist = IRUtils().get_distance_cm()
+utils = IRUtils()
+start_dist = utils.get_distance_cm()
 
 cs = ColorSensor()
 driver = Driver()
-driver.set_speed(70)
+driver.set_speed(40)
 
 driver.move()
 
-found_color = False
-while not found_color:
+safe_threshold = 10
+
+while True:
     
+    distance_from_wall = utils.get_distance_cm()
+
+    if distance_from_wall < safe_threshold:
+        driver.turn(2)
+        driver.turn_seconds(1)
+
     if cs.color == 6:
         break
 
