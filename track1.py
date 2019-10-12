@@ -23,7 +23,7 @@ class Track1:
 
         if args[0] == "find":
             self.driver.move()
-            print(self.irutils.find_target_distance(int(args[1])))
+            self.irutils.find_target_distance(int(args[1]))
             self.driver.stop()
         elif args[0] == "hold":
             target_dist = int(args[1])
@@ -37,7 +37,7 @@ class Track1:
                     break
 
                 self.driver.stop()
-                self.driver.turn(int(d * 15))
+                self.driver.turn(int(d * 5))
                 self.irutils.find_target_distance(target_dist)
                 self.driver.stop()
 
