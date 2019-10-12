@@ -47,3 +47,6 @@ class Driver:
 
     def move_seconds(self, seconds):
         self.driver.on_for_seconds(0, self.speed, seconds)
+
+    def back_seconds(self, seconds):
+        self.driver.on_for_seconds(0, -self.speed, seconds)
