@@ -1,4 +1,4 @@
-from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_B, OUTPUT_C
+from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_B, OUTPUT_C, MoveSteering
 from ev3dev2.sensor.lego import ColorSensor, UltrasonicSensor
 from ev3dev2.button import Button
 
@@ -7,7 +7,6 @@ from time import sleep
 class LineFollower:
     # Constructor
     def __init__(self):
-        self.btn = Button()
         self.shut_down = False
 
     # Main method
@@ -22,7 +21,7 @@ class LineFollower:
         lm = LargeMotor('outB')
         rm = LargeMotor('outC')
 
-        speed = 360/4  # deg/sec, [-1000, 1000]
+        speed = 360/2  # deg/sec, [-1000, 1000]
         dt = 500       # milliseconds
         stop_action = "coast"
 
@@ -35,7 +34,7 @@ class LineFollower:
         previous_error = 0
 
         # initial measurment
-        target_value = cs.value()
+        target_value = 30
 
         # Start the main loop
         while not self.shut_down:
@@ -70,4 +69,5 @@ class LineFollower:
 
             previous_error = error
 
-            measure = cs.color()
+line = LineFollower()
+line.run()
