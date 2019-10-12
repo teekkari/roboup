@@ -17,7 +17,7 @@ class LineFollower():
         self.too_light = too_light
         self.end = False
 
-    def run(self):
+    def run(self, target_color):
         dt = 500
         stop_action = "coast"
         speed = 400
@@ -108,6 +108,10 @@ class LineFollower():
 
                 turn *= -1
 
+        
+            if cs.color == target_color:
+                break
+
 
 
 start_dist = IRUtils().get_distance_cm()
@@ -125,4 +129,14 @@ while not found_color:
         break
 
 lineFollower = LineFollower(60, 20, 90)
-lineFollower.run()
+lineFollower.run(4)
+
+driver.turn_seconds(2)
+driver.set_speed(-70)
+
+sleep(10)
+
+driver.turn_seconds(2)
+driver.turn_degrees(-90)
+
+lineFollower.run(100)
