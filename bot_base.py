@@ -85,6 +85,52 @@ class Bot:
                     pass # idk lol
 
 
+    def seek_wall_parallel(self):
+        TURN_AMT = 6
+
+        old_speed = self.driver.get_speed()
+        self.driver.set_speed(10)
+        
+        dist = self.irutils.get_distance_cm()
+
+        self.driver.turn_degrees(TURN_AMT)
+        time.sleep(0.5)
+
+        new_dist = self.irutils.get_distance_cm()
+
+        if new_dist < dist:
+            while new_dist < dist:
+                self.driver.turn_degrees(TURN_AMT)
+                time.sleep(0.5)
+                dist = new_dist
+                new_dist = self.irutils.get_distance_cm()
+
+            time.sleep(0.5)
+            self.driver.turn_degrees(-TURN_AMT / 2)
+        else:
+            new_dist, dist = dist, new_dist #swap vars
+            while new_dist < dist:
+                self.driver.turn_degrees(-TURN_AMT)
+                time.sleep(0.5)
+                dist = new_dist
+                new_dist = self.irutils.get_distance_cm()
+            
+            time.sleep(0.5)
+            self.driver.turn_degrees(TURN_AMT / 2)
+
+        self.driver.set_speed(old_speed)
+
+
+    def victory(self):
+        self.driver.turn_degrees(-90)
+
+
+
+
+
+
+
+
             
 
 
