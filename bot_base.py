@@ -1,8 +1,6 @@
 from move import Driver
 from distance_utils import IRUtils
-from ev3dev2.sensor.lego import ColorSensor
-
-# import touch sensor
+from ev3dev2.sensor.lego import ColorSensor, TouchSensor
 
 import time
 
@@ -29,7 +27,7 @@ class Bot:
     def __init__(self, IRSensorsOnRightSide):
         self.driver = Driver()
         self.irutils = IRUtils()
-        #self.ts = TouchSensor()
+        self.ts = TouchSensor()
         self.cs = ColorSensor()
 
         self.IRSensorsOnRightSide = IRSensorsOnRightSide
@@ -58,13 +56,11 @@ class Bot:
 
                 if d == 0: # bump
                     break
-                elif abs(d) > (target_dist + 5): # gap encountered
+                elif abs(d) > (target_dist + 10): # gap encountered
                     break
 
                 self.driver.stop()
-                self.driver.turn(int(d))
-                self.irutils.find_target_distance(target_dist)
-                self.driver.stop()
+                self.driver.turn_degrees(int(d))
         elif args[0] == "turn":
             self.driver.turn_degrees(int(args[1]))
         elif args[0] == "reverse":
