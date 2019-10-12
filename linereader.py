@@ -27,7 +27,7 @@ class LineFollower:
 
         # PID tuning
         Kp = 1  # proportional gain
-        Ki = 0.001  # integral gain
+        Ki = 0.1  # integral gain
         Kd = 0.01  # derivative gain
 
         integral = 0
