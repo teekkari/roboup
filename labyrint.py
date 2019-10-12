@@ -28,7 +28,7 @@ class LineFollower():
         Ki = 0  # integral gain
         Kd = 0  # derivative gain
 
-        target_value = self.too_light
+        target_value = self.correct_value
 
         count = 0
         integral = 0
@@ -43,35 +43,38 @@ class LineFollower():
         last_turn = 1
 
         while not self.end:
-            error = target_value - cs.value()
+            measured_value = cs.value()
+            
+            error = measured_value - target_value
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
-            # u zero:     on target,  drive forward
-            # u positive: too bright, turn right
-            # u negative: too dark,   turn left
+            if error < 0:
+                u = (Kp * factor * factor_negative * error) + (Ki * integral) + (Kd * derivative)
+            else:
+                u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
 
-            u = (Kp * error) + (Ki * integral) + (Kd * derivative)
 
-            # limit u to safe values: [-1000, 1000] deg/sec
             if speed + abs(u) > 1000:
                 if u >= 0:
                     u = 1000 - speed
                 else:
                     u = speed - 1000
 
-            # run motors
-            if u >= 0:
-                lm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - u, stop_action=stop_action)
-                sleep(dt / 1000)
+            print(u)
+            if u < 0:
+                lm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),1.3), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),1.3), stop_action=stop_action)
+                last_turn = 0
+                sleep(dt / 2000)
             else:
-                lm.run_timed(time_sp=dt, speed_sp=speed - u, stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
-                sleep(dt / 1000)
+                lm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),1.3), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),1.3), stop_action=stop_action)
+                last_turn = 1
+                sleep(dt / 2000)
         
             previous_error = error
 
 
-lineFollower = LineFollower(31, 18, 62)
+lineFollower = LineFollower(60, 20, 90)
 lineFollower.run()
