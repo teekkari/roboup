@@ -18,7 +18,7 @@ class LineFollower():
     def run(self):
         dt = 500
         stop_action = "coast"
-        speed = 360/2
+        speed = 360
 
         cs = ColorSensor()
         cs.mode = 'COL-REFLECT'
@@ -51,8 +51,6 @@ class LineFollower():
 
             while color == 6:
                 error = measured_value - target_value
-                print(error)
-                print(error > 0)
                 integral += (error * dt)
                 derivative = (error - previous_error) / dt
 
@@ -69,7 +67,6 @@ class LineFollower():
                     else:
                         u = speed - 1000
 
-                print(speed)
                 if u < 0:
                     lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
@@ -92,17 +89,22 @@ class LineFollower():
 
                 while not found_white:
 
-                    lm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
-                    rm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
+                    lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
 
                     if cs.color == 6:
+                        lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
+                        rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
                         found_white = True
+                        break
 
                     if left_number >= count:
                         break
                     
                     left_number += 1
-                    turn *= -1
+                
+
+                turn *= -1
 
 
 lineFollower = LineFollower(60, 20, 90)
