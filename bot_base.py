@@ -54,16 +54,16 @@ class Bot:
             while self.ts.is_pressed == 0:
                 d = self.irutils.distance_delta(target_dist)
 
-                if abs(d) > 3:
+                if abs(d) > 5:
                     print("turn")
                     if self.IRSensorsOnRightSide:
-                        self.driver.turn_degrees(int(d))
+                        self.driver.turn_degrees(int(d / 2))
                     else:
-                        self.driver.turn_degrees(-int(d))
+                        self.driver.turn_degrees(-int(d / 2))
 
                 print("move")
                 self.driver.move()
-                time.sleep(0.5)
+                time.sleep(2)
 
             self.driver.stop()
 
