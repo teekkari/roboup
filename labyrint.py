@@ -54,13 +54,13 @@ class LineFollower():
                     u = speed - 1000
 
             if u < 0:
-                lm.run_timed(time_sp=dt, speed_sp=speed - u, stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
                 rm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
                 last_turn = 0
                 sleep(dt / 2000)
             else:
                 lm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - u, stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
                 last_turn = 1
                 sleep(dt / 2000)
             
