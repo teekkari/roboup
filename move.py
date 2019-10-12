@@ -10,6 +10,9 @@ class Driver:
     def set_speed(self, speed):
         self.speed = max(-100, max(100, speed))
 
+    def get_speed(self):
+        return self.speed
+
     
     def move(self):
         self.driver.on(0, SpeedPercent(self.speed))
