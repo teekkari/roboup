@@ -21,35 +21,23 @@ class Remote():
 
     def top_left_channel_1_action(self, state):
         print(self.ir.top_left())
-        if state:
-            self.drive.move_cm(1)
-            print("forward")
-        else:
-            self.drive.stop()
+        while state:
+            self.drive.move_cm(5)
 
     def bot_left_channel_1_action(self, state):
         print(self.ir.bottom_left())
-        if state:
-            self.drive.move_neg_cm(1)
-            print("backward")
-        else:
-            self.drive.stop()
+        while state:
+            self.drive.move_neg_cm(5)
 
     def top_right_channel_1_action(self, state):
         print(self.ir.top_right())
-        if state:
+        while state:
             self.drive.turn_degrees(10)
-            print("right")
-        else:
-            self.drive.stop()
 
     def bot_right_channel_1_action(self, state):
         print(self.ir.bottom_right())
-        if state:
-            self.drive.turn_degrees(-10)
-            print("left")
-        else:
-            self.drive.stop()
+        while state:
+            self.drive.turn_neg_degrees(10)
 
     def remote(self):
         try:
