@@ -11,42 +11,37 @@ class LineFollower:
         self.shut_down = False
 
     # Main method
-    def run(self, color_to_follow, target_color):
+    def run(self):
 
         # sensors
-        cs = ColorSensor()
+        cs = ColorSensor() 
 
         cs.mode = 'COL-REFLECT'  # measure light intensity
 
         # motors
-        lm = LargeMotor(OUTPUT_B)
-        rm = LargeMotor(OUTPUT_C)
+        lm = LargeMotor('outB')
+        rm = LargeMotor('outC')
 
         speed = 360/4  # deg/sec, [-1000, 1000]
         dt = 500       # milliseconds
         stop_action = "coast"
 
-
         # PID tuning
         Kp = 1  # proportional gain
-        Ki = 0  # integral gain
-        Kd = 0  # derivative gain
+        Ki = 0.1  # integral gain
+        Kd = 0.1  # derivative gain
 
         integral = 0
         previous_error = 0
 
-        # initial measurmentt
-        target_value = color_to_follow
-
-        target_color = cs.color()
+        # initial measurment
+        target_value = cs.value()
 
         # Start the main loop
         while not self.shut_down:
-            measured_value = cs.value()
 
             # Calculate steering using PID algorithm
-
-            error = target_value - measured_value
+            error = target_value - cs.value()
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
@@ -76,7 +71,3 @@ class LineFollower:
             previous_error = error
 
             measure = cs.color()
-            
-            if measure == target_color:
-                lm.run_timed(time_sp=2000, speed_sp=600, stop_action=stop_action)
-                self.shut_down = True
