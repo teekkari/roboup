@@ -35,6 +35,8 @@ class LineFollower():
 
         previous_error = 0
 
+        factor_negative = (self.correct_value - self.too_dark) / 100
+        factor_positive = (self.too_light - self.correct_value) / 100
         factor = (self.too_light - self.correct_value) / (self.correct_value - self.too_dark)
 
         # if value is 0 turned to left last
@@ -48,33 +50,31 @@ class LineFollower():
             derivative = (error - previous_error) / dt
 
             if error < 0:
-                u = (Kp * factor * error) + (Ki * integral) + (Kd * derivative)
+                u = (Kp * factor * factor_negative * error) + (Ki * integral) + (Kd * derivative)
             else:
-                u = (Kp * error) + (Ki * integral) + (Kd * derivative)
+                u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
+
 
             if speed + abs(u) > 1000:
                 if u >= 0:
                     u = 1000 - speed
                 else:
                     u = speed - 1000
-            
 
             print(u)
             if u < 0:
-                lm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),1.3), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),1.3), stop_action=stop_action)
                 last_turn = 0
                 sleep(dt / 2000)
             else:
-                lm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),1.3), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),1.3), stop_action=stop_action)
                 last_turn = 1
                 sleep(dt / 2000)
         
             previous_error = error
 
 
-
-if __name__ == "__main__":
-    lineFollower = LineFollower(28, 18, 62)
-    lineFollower.run()
+lineFollower = LineFollower(60, 20, 90)
+lineFollower.run()
