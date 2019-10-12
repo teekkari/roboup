@@ -16,10 +16,11 @@ def run_bot():
     cs = ColorSensor()
     drop_dens()
     ir_changed()
+    cs.mode = 'COL-COLOR'
     end = True
     while end:
         drive_obj.on_for_degrees(SpeedPercent(75), SpeedPercent(75), 1)
-        if cs.color() == 6:
+        if cs.color == 6:
             end = False
 
 if __name__ == "__main__":

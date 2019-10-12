@@ -1,10 +1,10 @@
-from ev3.ev3dev import Motor, OUTPUT_B, OUTPUT_C
+from ev3.ev3dev import Motor, OUTPUT_B, OUTPUT_C, MoveTank
 from ev3.lego import InfraredSensor
-from ev3.event_loop import EventLoop
 
 ir = InfraredSensor()
+ir.mode = 'IR-REMOTE'
 
-motors = [Motor(OUTPUT_B), Motor(OUTPUT_C)]
+tank = MoveTank(OUTPUT_B, OUTPUT_C)
 
 buttons = [
     (ir.REMOTE.RED_UP, ir.REMOTE.RED_DOWN),
