@@ -15,7 +15,11 @@ driver.set_speed(30)
 
 driver.move()
 
-safe_threshold = 20
+safe_threshold = 10
+max_distance = 14
+
+lm = LargeMotor(OUTPUT_B)
+rm = LargeMotor(OUTPUT_C)
 
 while True:
     
@@ -23,9 +27,16 @@ while True:
     print(distance_from_wall)
 
     if distance_from_wall < safe_threshold:
-        driver.turn_degrees(20)
-        driver.move_seconds(0.5)
-        driver.move()
+        lm = LargeMotor(OUTPUT_B)
+        rm = LargeMotor(OUTPUT_C)
+
+        lm.on(30)
+        rm.on(20)
+        
+    if distance_from_wall > max_distance:
+
+        lm.on(20)
+        rm.on(30)
 
     if cs.color == 6:
         break
@@ -33,14 +44,7 @@ while True:
 lineFollower = LineFollower(60, 20, 90)
 lineFollower.run(4)
 
-
 distance_from_wall = utils.get_distance_cm()
-sleep(5)
-
-driver.reverse()
-
-while distance_from_wall - 4 < utils.get_distance_cm() and distance_from_wall + 4 >= utils.get_distance_cm:
-    driver.stop()
 
 driver.turn_degrees(-90)
 

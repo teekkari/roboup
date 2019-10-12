@@ -18,7 +18,7 @@ class LineFollower():
         self.rm = LargeMotor(OUTPUT_C)
 
 
-    def find_color(self, search = False):
+    def find_color(self, search = False, safe_from_wall=20):
         utils = IRUtils()
 
         cs = ColorSensor()
@@ -29,10 +29,17 @@ class LineFollower():
         driver.move()
 
         while True:
+            distance_from_wall = utils.get_distance_cm()
+            print(distance_from_wall)
+
+            if distance_from_wall < safe_from_wall:
+                driver.turn_degrees(15)
+                driver.move_seconds(0.5)
+                driver.move()
+
             if cs.color == 6:
                 break
         
-
     def run(self, target_color):
         lm = self.lm
         rm = self.rm
@@ -101,16 +108,13 @@ class LineFollower():
 
 
             found_white = False
-            count = 25
+            count = 20
 
             while not found_white:
                 left_number = 0
                 count *= 2.5
 
                 while not found_white:
-                    
-                    if cs.color == target_color:
-                        break
 
                     lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
