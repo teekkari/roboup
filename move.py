@@ -49,6 +49,9 @@ class Driver:
             steering = 100
         else:
             steering = -100
+
+        print(steering)
+        print(degrees*TRANSFORM_CONST)
         #steering = 100 if degrees >= 0 else -100
         self.driver.on_for_degrees(steering, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
 

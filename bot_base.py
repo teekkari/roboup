@@ -122,7 +122,7 @@ class Bot:
 
 
     def victory(self):
-        self.driver.turn_degrees(-180)
+        self.driver.turn_degrees(-90)
 
 
 
