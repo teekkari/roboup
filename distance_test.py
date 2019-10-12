@@ -1,12 +1,25 @@
 from distance_utils import IRUtils
 from bot_base import Bot
 
+import time
+
 if __name__=="__main__":
     ir = IRUtils()
 
     bot = Bot(False)
 
-    bot.seek_wall_parallel()
+    bot.driver.move()
+
+    time.sleep(2)
+
+    bot.driver.move()
+
+    time.sleep(3)
+
+    bot.driver.stop()
+
+
+    #bot.seek_wall_parallel()
 
     #bot.victory()
 

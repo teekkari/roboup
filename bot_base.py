@@ -3,6 +3,7 @@ from distance_utils import IRUtils
 from ev3dev2.sensor.lego import ColorSensor, TouchSensor
 
 import time
+import math
 
 # commands
 # forward
@@ -40,27 +41,26 @@ class Bot:
             self.driver.move()
             self.irutils.find_target_distance(int(args[1]))
             self.driver.stop()
+            self.seek_wall_parallel()
         elif args[0] == "sleep":
             time.sleep(int(args[1]))
         elif args[0] == "stop":
             self.driver.stop()
         elif args[0] == "hold":
             target_dist = int(args[1])
+            while self.ts.is_pressed == 0:
+                d = self.irutils.get_distance_cm()
 
-            d = self.irutils.get_turn_from_dist(target_dist)
-            self.driver.turn_degrees(int(d))
+                while abs(d - target_dist) > 1.5:
 
-            while True:
+                    self.driver.turn_degrees(int(d))
+                    self.driver.move_cm(2)
+                    self.driver.turn_degrees(-int(d))
+
+                    d = self.irutils.get_distance_cm()
+
                 self.driver.move()
-                d = self.irutils.hold_distance(target_dist, self.IRSensorsOnRightSide)
 
-                if d == 0: # bump
-                    break
-                elif abs(d) > (target_dist + 20): # gap encountered
-                    break
-
-                self.driver.stop()
-                self.driver.turn_degrees(int(d))
         elif args[0] == "turn":
             self.driver.turn_degrees(int(args[1]))
         elif args[0] == "reverse":
