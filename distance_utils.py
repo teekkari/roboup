@@ -15,9 +15,9 @@ class IRUtils:
 
     def get_distance_cm(self):
         MAX_DIST = 70
-        print(self.ir.proximity, "%")
-        print(self.ir.proximity / 100.0 * MAX_DIST, "cm")
-        return self.ir.proximity / 100.0 * MAX_DIST
+        dist = self.ir.proximity / 100.0 * MAX_DIST
+        print(" {:.2f} cm".format(dist))
+        return dist
 
     def get_distance_per(self):
         return self.ir.proximity
@@ -52,6 +52,7 @@ class IRUtils:
 
         while abs(self.get_distance_cm() - target_distance) > ERR_MARGIN:
             continue
-        
+
+        print(self.get_distance_cm() - target_distance, "ftd")
         return self.get_distance_cm() - target_distance
 
