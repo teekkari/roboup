@@ -35,8 +35,7 @@ class LineFollower():
 
         previous_error = 0
 
-        factor_negative = (self.correct_value - self.too_dark) / 100
-        factor_positive = (self.too_light - self.correct_value) / 100
+        factor = (self.too_light - self.correct_value) / (self.correct_value - self.too_dark)
 
         # if value is 0 turned to left last
         last_turn = 1
@@ -49,9 +48,9 @@ class LineFollower():
             derivative = (error - previous_error) / dt
 
             if error < 0:
-                u = (Kp * factor_negative * error) + (Ki * integral) + (Kd * derivative)
+                u = (Kp * factor * error) + (Ki * integral) + (Kd * derivative)
             else:
-                u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
+                u = (Kp * error) + (Ki * integral) + (Kd * derivative)
 
             if speed + abs(u) > 1000:
                 if u >= 0:
