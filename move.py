@@ -17,6 +17,10 @@ class Driver:
     def move_cm(self, cm):
         TRANSFORM_CONST = 37.0
         self.driver.on_for_degrees(0, SpeedPercent(self.speed), cm * TRANSFORM_CONST)
+    
+    def move_neg_cm(self, cm):
+        TRANSFORM_CONST = 37.0
+        self.driver.on_for_degrees(0, SpeedPercent(self.speed), -cm * TRANSFORM_CONST)
 
     def reverse(self):
         self.driver.on(0, SpeedPercent(-self.speed))

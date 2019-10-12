@@ -9,7 +9,9 @@ class Spin():
         self.drive = Driver()
         self.sensor = ColorSensor()
         
-    
+    def drive_right(self, time_a, time_b):
+        pass
+
     def go(self):
         self.sensor.mode = 'COL-COLOR'
         try:
