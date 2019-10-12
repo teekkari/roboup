@@ -8,7 +8,6 @@ class Dens(Bot):
         self.moveset = [
             "find 20",
             "hold 20",
-            "turn 180"
         ]
 
         self.moveset2 = [

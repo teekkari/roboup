@@ -48,7 +48,7 @@ class Bot:
             target_dist = int(args[1])
 
             d = self.irutils.get_turn_from_dist(target_dist)
-            self.driver.turn(int(d))
+            self.driver.turn_degrees(int(d))
 
             while True:
                 self.driver.move()
