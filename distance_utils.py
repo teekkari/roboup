@@ -10,6 +10,7 @@ class IRUtils:
         self.ir = InfraredSensor()
         self.ir.mode = 'IR-PROX'
         self.speed = SpeedPercent(30)
+        self.ts = TouchSensor()
 
     def set_speedpc(self, percentage):
         if percentage >= 0 and percentage <= 100:
@@ -33,18 +34,17 @@ class IRUtils:
     def hold_distance(self, target_distance, sensorOnRightSide):
 
         ERR_MARGIN = 4 # cm
-        TURN_CONST = 5
+        TURN_CONST = 2
 
-        bump = False
-
-        while not bump:
+        while self.ts.is_pressed == 0:
             dist = self.get_distance_cm()
             delta = dist - target_distance
 
             # do nothing if we havent passed error threshold
             if abs(delta) < ERR_MARGIN or delta == 0.0:
-                time.sleep(0.005) #5ms
+                # time.sleep(0.005) #5ms
                 continue
+
             if sensorOnRightSide:
                 return delta*TURN_CONST
             else:
@@ -54,7 +54,7 @@ class IRUtils:
 
 
     def get_turn_from_dist(self, target_distance):
-        TURN_CONST = 5
+        TURN_CONST = 2
         dist = self.get_distance_cm()
         delta = dist - target_distance
 
