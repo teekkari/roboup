@@ -102,6 +102,7 @@ class LineFollower():
                     if left_number >= count:
                         break
                     
+                    left_number += 1
                     
                 right = False
                 right_number = 0
@@ -117,6 +118,8 @@ class LineFollower():
 
                     if right_number >= count:
                         break
+
+                    right_number += 1
 
             
 
