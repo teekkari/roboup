@@ -45,9 +45,9 @@ while True:
 
 lineFollower = LineFollower(60, 20, 90)
 
-while not_yellow:
+while True:
     current_color = cs.color
-    
+    print(current_color) 
     if current_color == 6:
         lineFollower.run_on_white()
     elif current_color == 4:

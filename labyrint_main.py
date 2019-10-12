@@ -103,7 +103,11 @@ class LineFollower():
                     sleep(dt / 2000)
 
                 color = cs.color
+                print(color)
                 previous_error = error
+            if color != 6:
+                self.end = True
+
 
         return [cs.value(), cs.color()]
 
