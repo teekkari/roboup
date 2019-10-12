@@ -39,8 +39,9 @@ class LineFollower():
 
             if cs.color == 6:
                 break
-        
-    def run(self, target_color):
+    
+
+    def run_on_white(self):
         lm = self.lm
         rm = self.rm
 
@@ -58,7 +59,7 @@ class LineFollower():
 
         target_value = self.correct_value
 
-        count = 0
+
         integral = 0
 
         previous_error = 0
@@ -68,9 +69,7 @@ class LineFollower():
         factor = (self.too_light - self.correct_value) / (self.correct_value - self.too_dark)
 
         # if value is 0 turned to left last
-        turn = -1
 
-        turn_speed_value = 200
 
         while not self.end:
             measured_value = cs.value()
@@ -106,33 +105,55 @@ class LineFollower():
                 color = cs.color
                 previous_error = error
 
+        return [cs.value(), cs.color()]
 
-            found_white = False
-            count = 20
+
+    def find_white_line(self):
+        lm = self.lm
+        rm = self.rm
+        turn = -1
+
+        cs = ColorSensor()
+
+        turn_speed_value = 200
+
+        found_white = False
+        count = 20
+        
+        dt = 500
+        stop_action = "coast"
+
+        while not found_white:
+            left_number = 0
+            count *= 2.5
 
             while not found_white:
-                left_number = 0
-                count *= 2.5
 
-                while not found_white:
+                lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
 
+                if cs.color == 6:
                     lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
+                    found_white = True
+                    turn *= -1
 
-                    if cs.color == 6:
-                        lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
-                        rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
-                        found_white = True
-                        turn *= -1
-
-                    if left_number >= count:
-                        break
-                    
-                    left_number += 1
+                if left_number >= count:
+                    break
                 
+                left_number += 1
+            
 
-                turn *= -1
+            turn *= -1
 
-        
-            if cs.color == target_color:
-                break
+        return turn
+
+    def button_find(self):
+        driver = Driver()
+        driver.move_seconds(0.5)
+
+        driver.turn_degrees(180)
+
+        driver.move_seconds(0.5)
+
+        self.find_white_line()
