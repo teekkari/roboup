@@ -41,11 +41,20 @@ while True:
     if cs.color == 6:
         break
 
+
 lineFollower = LineFollower(60, 20, 90)
-lineFollower.run(4)
+
+while not_yellow:
+    current_color = cs.color
+    
+    if current_color == 6:
+        lineFollower.run_on_white()
+    elif current_color == 4:
+        lineFollower.button_find()
+    else:
+        lineFollower.find_white_line()
 
 distance_from_wall = utils.get_distance_cm()
 
 driver.turn_degrees(-90)
 
-lineFollower.run(100)
