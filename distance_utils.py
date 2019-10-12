@@ -30,7 +30,7 @@ class IRUtils:
     # 0 = bumped
     def hold_distance(self, target_distance):
 
-        ERR_MARGIN = 1 # cm
+        ERR_MARGIN = 2 # cm
 
         bump = False
 
@@ -48,7 +48,7 @@ class IRUtils:
 
 
     def find_target_distance(self, target_distance):
-        ERR_MARGIN = 0.2 #cm
+        ERR_MARGIN = 0.5 #cm
 
         while abs(self.get_distance_cm() - target_distance) > ERR_MARGIN:
             continue
