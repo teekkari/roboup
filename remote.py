@@ -14,6 +14,7 @@ class Remote():
         self.ir.on_channel1_top_right = self.top_right_channel_1_action
         self.ir.on_channel1_bottom_right = self.bot_right_channel_1_action
         self.ghost = []
+        self.now = 0
 
     def write_file(self, what, how_long):
         with open('ghost.csv', 'wb', newline='') as f:
@@ -31,37 +32,37 @@ class Remote():
     def top_left_channel_1_action(self, state):
         print(self.ir.top_left())
         if state:
-            now = time.time()
+            self.now = time.time()
             self.drive.move()
-            print("Time after forward ", time.time() - now)
         else:
+            print("Time after forward ", time.time() - self.now)
             self.drive.stop()
 
     def bot_left_channel_1_action(self, state):
         print(self.ir.bottom_left())
         if state:
-            now = time.time()
+            self.now = time.time()
             self.drive.reverse()
-            print("Time after forward ", time.time() - now)
         else:
+            print("Time after backward ", time.time() - self.now)
             self.drive.stop()
 
     def top_right_channel_1_action(self, state):
         print(self.ir.top_right())
         if state:
-            now = time.time()
+            self.now = time.time()
             self.drive.turn(100)
-            print("Time after forward ", time.time() - now)
         else:
+            print("Time after right ", time.time() - self.now)
             self.drive.stop()
 
     def bot_right_channel_1_action(self, state):
         print(self.ir.bottom_right())
         if state:
-            now = time.time()
+            self.now = time.time()
             self.drive.turn(-100)
-            print("Time after forward ", time.time() - now)
         else:
+            print("Time after left ", time.time() - self.now)
             self.drive.stop()
 
     def remote(self):
