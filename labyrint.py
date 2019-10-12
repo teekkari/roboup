@@ -18,7 +18,7 @@ class LineFollower():
     def run(self):
         dt = 500
         stop_action = "coast"
-        speed = 360
+        speed = 400
 
         cs = ColorSensor()
         cs.mode = 'COL-REFLECT'
@@ -42,7 +42,7 @@ class LineFollower():
         # if value is 0 turned to left last
         turn = -1
 
-        turn_speed_value = 150
+        turn_speed_value = 200
 
         while not self.end:
             measured_value = cs.value()
@@ -96,7 +96,7 @@ class LineFollower():
                         lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
                         rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
                         found_white = True
-                        break
+                        turn *= -1
 
                     if left_number >= count:
                         break
