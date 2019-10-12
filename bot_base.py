@@ -1,6 +1,8 @@
 from move import Driver
 from distance_utils import IRUtils
-from ev3dev2.sensor.lego import TouchSensor, ColorSensor
+from ev3dev2.sensor.lego import ColorSensor
+
+# import touch sensor
 
 import time
 
@@ -27,7 +29,7 @@ class Bot:
     def __init__(self):
         self.driver = Driver()
         self.irutils = IRUtils()
-        self.ts = TouchSensor()
+        #self.ts = TouchSensor()
         self.cs = ColorSensor()
 
 
@@ -75,7 +77,7 @@ class Bot:
                     pass # color sensor color int(args[3])
                 elif args[2] == "wall":
                     self.driver.move()
-                    self.ts.wait_for_pressed()
+                    #self.ts.wait_for_pressed()
                     self.driver.stop()
                     pass # touch sensor pressed
                 elif args[2] == "finish":
