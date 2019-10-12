@@ -49,17 +49,20 @@ class Bot:
         elif args[0] == "hold":
             target_dist = int(args[1])
             while self.ts.is_pressed == 0:
-                d = self.irutils.get_distance_cm()
+                d = self.irutils.distance_delta(target_dist)
 
-                while abs(d - target_dist) > 1.5 and self.ts.is_pressed == 0:
+                while abs(target_dist - d) > 1.5 and self.ts.is_pressed == 0:
 
                     print(d, "d")
 
                     self.driver.turn_degrees(int(d/2))
-                    self.driver.move_cm(2)
+                    time.sleep(0.2)
+                    self.driver.move_cm(3)
+                    time.sleep(0.5)
                     self.driver.turn_degrees(-int(d/2))
+                    time.sleep(0.2)
 
-                    d = self.irutils.get_distance_cm()
+                    d = self.irutils.distance_delta(target_dist)
 
                 self.driver.move()
 
