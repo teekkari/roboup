@@ -19,7 +19,7 @@ class Spin():
             now = time.time()
 
             
-            while time.time() - now < 10:
+            while time.time() - now < 7:
                 self.drive.turn(-20)
             print("Turned left for 10s")
             self.drive.set_speed(50)
@@ -31,6 +31,7 @@ class Spin():
                 self.drive.turn(-20)
                 time.sleep(1)
                 self.drive.stop()
+            self.drive.stop()
         except Exception as e:
             print(e)
             self.drive.stop()
