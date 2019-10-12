@@ -14,10 +14,10 @@ from distance_utils import IRUtils
 
 def run_bot():
 
-    iru = IRUtils
+    iru = IRUtils()
 
     while True:
-        iru.get_distance_cm
+        iru.get_distance_cm()
 
     return
 

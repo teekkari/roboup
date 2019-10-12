@@ -1,4 +1,5 @@
 from ev3dev2.sensor.lego import InfraredSensor
+from ev3dev2.sensor.lego import TouchSensor
 
 
 class IRUtils:
@@ -14,3 +15,27 @@ class IRUtils:
 
     def get_distance_per(self):
         return self.ir.proximity
+
+
+    # assuming ir sensor is looking at the right side
+    def hold_distance(self, target_distance, tank, callback):
+        ERR_MARGIN = 0.1
+
+        bump = False
+
+        while not bump:
+            dist = self.get_distance_cm()
+            delta = dist - target_distance
+
+            # do nothing if we havent passed error threshold
+            if abs(delta) < ERR_MARGIN:
+                continue
+
+            if delta < 0:
+                #turn right slightly
+                pass
+            else:
+                #turn left slightly
+                pass
+
+
