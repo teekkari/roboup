@@ -39,6 +39,8 @@ class LineFollower():
         factor_positive = (self.too_light - self.correct_value) / 100
         factor = (self.too_light - self.correct_value) / (self.correct_value - self.too_dark)
 
+        turn_speed = 10
+
         # if value is 0 turned to left last
         last_turn = 1
 
@@ -46,34 +48,39 @@ class LineFollower():
             measured_value = cs.value()
             
             error = measured_value - target_value
+            print(error)
+            print(error > 0)
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
             if error < 0:
-                u = (Kp * factor * factor_negative * error) + (Ki * integral) + (Kd * derivative)
+                u = (Kp * factor * factor_negative * turn_speed * error) + (Ki * integral) + (Kd * derivative)
             else:
                 u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
 
-            if speed + abs(u) > 1000:
+
+            if speed + pow(abs(u),2) > 1000:
                 if u >= 0:
                     u = 1000 - speed
                 else:
                     u = speed - 1000
 
+            
+
             print(u)
             if u < 0:
-                lm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
                 last_turn = 0
                 sleep(dt / 2000)
             else:
-                lm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
                 last_turn = 1
                 sleep(dt / 2000)
         
             previous_error = error
 
 
-lineFollower = LineFollower(31, 18, 62)
+lineFollower = LineFollower(60, 20, 90)
 lineFollower.run()

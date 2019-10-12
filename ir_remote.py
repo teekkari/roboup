@@ -51,12 +51,13 @@ class Remote():
         else:
             self.drive.stop()
 
-    def remote():
+    def remote(self):
         try:
             while True:
                 ir.process()
                 time.sleep(0.01)
-        except:
+        except Exception as e:
+            print(e)
             self.drive.stop()
 
 if __name__ == "__main__":
