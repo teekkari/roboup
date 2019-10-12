@@ -26,17 +26,20 @@ class Track1:
             print(self.irutils.find_target_distance(int(args[1])))
             self.driver.stop()
         elif args[0] == "hold":
+            target_dist = int(args[1])
             while True:
                 self.driver.move()
-                d = self.irutils.hold_distance(int(args[1]))
+                d = self.irutils.hold_distance(target_dist)
 
                 if d == 0: # bump
                     break
-                elif d > 10: # gap encountered
+                elif abs(d) > (target_dist + 10): # gap encountered
                     break
 
                 self.driver.stop()
-                self.driver.turn_rotations(int(d * 30), 5)
+                self.driver.turn(int(d * 15))
+                self.irutils.find_target_distance(target_dist)
+                self.driver.stop()
 
 
 if __name__=="__main__":

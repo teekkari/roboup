@@ -17,7 +17,9 @@ class Driver:
         self.driver.off()
 
     def turn(self, steering):
+        steering = max(-150, min(150, steering))
         self.driver.on(steering, self.speed)
 
     def turn_rotations(self, steering, rotations):
+        steering = max(-150, min(150, steering))
         self.driver.on_for_rotations(steering, SpeedPercent(self.speed), rotations)
