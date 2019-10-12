@@ -121,6 +121,10 @@ class Bot:
         self.driver.set_speed(old_speed)
 
 
+    def victory(self):
+        self.driver.turn_degrees(-180)
+
+
 
 
 

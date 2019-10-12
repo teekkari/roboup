@@ -8,6 +8,8 @@ if __name__=="__main__":
 
     bot.seek_wall_parallel()
 
+    bot.victory()
+
     #while True:
     d = ir.get_distance_cm()
     v = ir.get_ir_value()
