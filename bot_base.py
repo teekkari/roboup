@@ -5,7 +5,7 @@ from ev3dev2.sensor.lego import ColorSensor, TouchSensor
 import time
 import math
 
-# commands
+#### commands
 # forward
 #   for
 #       int(cm_dist)
@@ -21,6 +21,7 @@ import math
 #   int(cm_dist_from_wall)
 # hold [hugs the wall with dist]
 #   int(cm_dist_from_wall)
+# seekwall
 
 
 class Bot:
@@ -42,6 +43,8 @@ class Bot:
             self.irutils.find_target_distance(int(args[1]))
             self.driver.stop()
             self.seek_wall_parallel()
+        elif args[0] == "seekwall":
+            self.seek_wall_parallel()
         elif args[0] == "sleep":
             time.sleep(int(args[1]))
         elif args[0] == "stop":
@@ -51,22 +54,15 @@ class Bot:
             while self.ts.is_pressed == 0:
                 d = self.irutils.distance_delta(target_dist)
 
-                while abs(d) > 1.5 and self.ts.is_pressed == 0:
-
-                    print(d, "d")
-
-                    self.driver.turn_degrees(int(d))
-                    time.sleep(1)
-                    self.driver.move_cm(4)
-                    time.sleep(3)
-                    self.driver.turn_degrees(-int(d))
-                    time.sleep(1)
-
-                    d = self.irutils.distance_delta(target_dist)
+                if abs(d) > 3:
+                    if self.IRSensorsOnRightSide:
+                        self.driver.turn_degrees(int(d))
+                    else:
+                        self.driver.turn_degrees(-int(d))
 
                 print("move")
                 self.driver.move()
-                time.sleep(1)
+                time.sleep(0.5)
 
             self.driver.stop()
 
