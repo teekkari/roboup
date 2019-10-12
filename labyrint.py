@@ -2,6 +2,8 @@ from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_C, OUTPU
 from ev3dev2.motor import MoveDifferential
 from ev3dev2.sensor.lego import ColorSensor
 from time import sleep
+from move import Driver
+from distance_utils import IRUtils
 
 lm = LargeMotor(OUTPUT_B)
 rm = LargeMotor(OUTPUT_C)
@@ -15,10 +17,10 @@ class LineFollower():
         self.too_light = too_light
         self.end = False
 
-    def run(self):
+    def run(self, target_color):
         dt = 500
         stop_action = "coast"
-        speed = 360
+        speed = 400
 
         cs = ColorSensor()
         cs.mode = 'COL-REFLECT'
@@ -42,7 +44,7 @@ class LineFollower():
         # if value is 0 turned to left last
         turn = -1
 
-        turn_speed_value = 150
+        turn_speed_value = 200
 
         while not self.end:
             measured_value = cs.value()
@@ -81,7 +83,7 @@ class LineFollower():
 
 
             found_white = False
-            count = 15
+            count = 25
 
             while not found_white:
                 left_number = 0
@@ -96,7 +98,7 @@ class LineFollower():
                         lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
                         rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
                         found_white = True
-                        break
+                        turn *= -1
 
                     if left_number >= count:
                         break
@@ -106,6 +108,35 @@ class LineFollower():
 
                 turn *= -1
 
+        
+            if cs.color == target_color:
+                break
+
+
+
+start_dist = IRUtils().get_distance_cm()
+
+cs = ColorSensor()
+driver = Driver()
+driver.set_speed(70)
+
+driver.move()
+
+found_color = False
+while not found_color:
+    
+    if cs.color == 6:
+        break
 
 lineFollower = LineFollower(60, 20, 90)
-lineFollower.run()
+lineFollower.run(4)
+
+driver.turn_seconds(2)
+driver.set_speed(-70)
+
+sleep(10)
+
+driver.turn_seconds(2)
+driver.turn_degrees(-90)
+
+lineFollower.run(100)
