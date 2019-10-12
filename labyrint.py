@@ -1,4 +1,3 @@
-
 from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_C, OUTPUT_B, MoveTank
 from ev3dev2.motor import MoveDifferential
 from ev3dev2.sensor.lego import ColorSensor
@@ -16,8 +15,8 @@ driver.set_speed(30)
 
 driver.move()
 
-safe_threshold = 20
-max_distance = 22
+safe_threshold = 10
+max_distance = 14
 
 lm = LargeMotor(OUTPUT_B)
 rm = LargeMotor(OUTPUT_C)
@@ -39,23 +38,14 @@ while True:
         lm.on(20)
         rm.on(30)
 
-    if cs.color == 6:
+    if cs.color == 6
         break
 
-
 lineFollower = LineFollower(60, 20, 90)
-
-while True:
-    current_color = cs.color
-    print(current_color) 
-    if current_color == 6:
-        lineFollower.run_on_white()
-    elif current_color == 4:
-        lineFollower.button_find()
-    else:
-        lineFollower.find_white_line()
+lineFollower.run(4)
 
 distance_from_wall = utils.get_distance_cm()
 
 driver.turn_degrees(-90)
 
+lineFollower.run(100)
