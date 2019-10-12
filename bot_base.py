@@ -94,6 +94,7 @@ class Bot:
         dist = self.irutils.get_distance_cm()
 
         self.driver.turn_degrees(TURN_AMT)
+        time.sleep(0.5)
 
         new_dist = self.irutils.get_distance_cm()
 
@@ -104,6 +105,7 @@ class Bot:
                 dist = new_dist
                 new_dist = self.irutils.get_distance_cm()
 
+            time.sleep(0.5)
             self.driver.turn_degrees(-TURN_AMT / 2)
         else:
             new_dist, dist = dist, new_dist #swap vars
@@ -113,6 +115,7 @@ class Bot:
                 dist = new_dist
                 new_dist = self.irutils.get_distance_cm()
             
+            time.sleep(0.5)
             self.driver.turn_degrees(TURN_AMT / 2)
 
         self.driver.set_speed(old_speed)
