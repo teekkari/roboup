@@ -18,7 +18,7 @@ class LineFollower():
     def run(self):
         dt = 500
         stop_action = "coast"
-        speed = 360/4
+        speed = 360/2
 
         cs = ColorSensor()
         cs.mode = 'COL-REFLECT'
@@ -35,8 +35,7 @@ class LineFollower():
 
         previous_error = 0
 
-        factor_negative = (self.correct_value - self.too_dark) / 100
-        factor_positive = (self.too_light - self.correct_value) / 100
+        factor = (self.too_light - self.correct_value) / (self.correct_value - self.too_dark)
 
         # if value is 0 turned to left last
         last_turn = 1
@@ -44,42 +43,38 @@ class LineFollower():
         while not self.end:
             measured_value = cs.value()
             
-
             error = measured_value - target_value
-            print(error)
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
             if error < 0:
-                u = (Kp * factor_negative * error) + (Ki * integral) + (Kd * derivative)
+                u = (Kp * factor * error) + (Ki * integral) + (Kd * derivative)
             else:
-                u = (Kp * factor_positive * error) + (Ki * integral) + (Kd * derivative)
+                u = (Kp * error) + (Ki * integral) + (Kd * derivative)
 
             if speed + abs(u) > 1000:
                 if u >= 0:
                     u = 1000 - speed
                 else:
                     u = speed - 1000
+            
 
+            print(u)
             if u < 0:
-                lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
                 last_turn = 0
                 sleep(dt / 2000)
             else:
-                lm.run_timed(time_sp=dt, speed_sp=speed + u, stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=speed + pow(abs(u),2), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=speed - pow(abs(u),2), stop_action=stop_action)
                 last_turn = 1
                 sleep(dt / 2000)
-            
-             
-            
+        
             previous_error = error
-            count += 1
-
-            if count > 200:
-                self.shut_down = True
 
 
-lineFollower = LineFollower(28, 18, 62)
-lineFollower.run()
+
+if __name__ == "__main__":
+    lineFollower = LineFollower(28, 18, 62)
+    lineFollower.run()
