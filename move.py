@@ -45,14 +45,6 @@ class Driver:
 
     def turn_degrees(self, degrees):
         TRANSFORM_CONST = 4.4
-        if degrees >= 0:
-            steering = 100
-        else:
-            steering = -100
-
-        print(steering)
-        print(degrees*TRANSFORM_CONST)
-        #steering = 100 if degrees >= 0 else -100
         self.driver.on_for_degrees(steering, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
 
     def turn_neg_degrees(self, degrees):
