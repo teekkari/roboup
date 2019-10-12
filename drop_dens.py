@@ -5,4 +5,6 @@ def drop_dens():
 
     med_motor.on_for_degrees(SpeedPercent(70), 90)
 
+drop_dens()
+
 
