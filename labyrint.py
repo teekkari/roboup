@@ -11,7 +11,7 @@ start_dist = utils.get_distance_cm()
 
 cs = ColorSensor()
 driver = Driver()
-driver.set_speed(40)
+driver.set_speed(30)
 
 driver.move()
 
@@ -24,7 +24,8 @@ while True:
 
     if distance_from_wall < safe_threshold:
         driver.turn_degrees(20)
-        driver.move_seconds(1)
+        driver.move_seconds(0.5)
+        driver.move()
 
     if cs.color == 6:
         break
@@ -32,12 +33,15 @@ while True:
 lineFollower = LineFollower(60, 20, 90)
 lineFollower.run(4)
 
-driver.move_seconds(2)
-driver.set_speed(-70)
 
-sleep(10)
+distance_from_wall = utils.get_distance_cm()
+sleep(5)
 
-driver.move_seconds(2)
+driver.reverse()
+
+while distance_from_wall - 4 < utils.get_distance_cm() and distance_from_wall + 4 >= utils.get_distance_cm:
+    driver.stop()
+
 driver.turn_degrees(-90)
 
 lineFollower.run(100)

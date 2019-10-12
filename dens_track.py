@@ -3,14 +3,16 @@ from bot_base import Bot
 class Dens(Bot):
     def __init__(self):
 
-        super().__init__()
+        super().__init__(False)
 
         self.moveset = [
-            "forward for 30"
+            "find 10",
+            "hold 10",
+            "turn 180"
         ]
 
         self.moveset2 = [
-            "forward for 30",
+            "forward for 50",
             "turn -20",
             "find 5",
             "hold 5",

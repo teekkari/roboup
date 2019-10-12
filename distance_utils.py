@@ -18,7 +18,7 @@ class IRUtils:
     def get_distance_cm(self):
         MAX_DIST = 70
         dist = self.ir.proximity / 100.0 * MAX_DIST
-        print(" {:.2f} cm".format(dist))
+        #print(" {:.2f} cm".format(dist))
         return dist
 
     def get_distance_per(self):
@@ -30,7 +30,7 @@ class IRUtils:
     # positive = turn right
     # negative = turn left
     # 0 = bumped
-    def hold_distance(self, target_distance):
+    def hold_distance(self, target_distance, sensorOnRightSide):
 
         ERR_MARGIN = 4 # cm
         TURN_CONST = 5
@@ -43,17 +43,19 @@ class IRUtils:
 
             # do nothing if we havent passed error threshold
             if abs(delta) < ERR_MARGIN or delta == 0.0:
-                time.sleep(0.05) #50ms
+                time.sleep(0.005) #5ms
                 continue
-            
-            return delta*TURN_CONST
+            if sensorOnRightSide:
+                return delta*TURN_CONST
+            else:
+                return -delta*TURN_CONST
         
         return 0
 
 
     def get_turn_from_dist(self, target_distance):
         TURN_CONST = 5
-        dist = self.get_distance_cm
+        dist = self.get_distance_cm()
         delta = dist - target_distance
 
         return delta*TURN_CONST
