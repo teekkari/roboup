@@ -5,21 +5,23 @@
 
 from ev3dev2.motor import LargeMotor, OUTPUT_B, OUTPUT_C, SpeedPercent, MoveTank
 from ev3dev2.sensor.lego import ColorSensor
-from drop_tire import drop_dens
-from ir_remote import ir_changed
+from drop_dens import drop_dens
+from ir_remote import remote
+from linereader import LineFollower
 
 
 def run_bot():
 
+    LineFollower.run()
 
     drive_obj = MoveTank(OUTPUT_B, OUTPUT_C)
     cs = ColorSensor()
     drop_dens()
-    ir_changed()
+    remote()
     cs.mode = 'COL-COLOR'
     end = True
     while end:
-        drive_obj.on_for_degrees(SpeedPercent(75), SpeedPercent(75), 1)
+        drive_obj.on_for_degrees(0, SpeedPercent(30), 90)
         if cs.color == 6:
             end = False
 

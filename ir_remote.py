@@ -2,38 +2,32 @@ from ev3.ev3dev import Motor, OUTPUT_B, OUTPUT_C, MoveTank
 from ev3.lego import InfraredSensor
 
 ir = InfraredSensor()
-ir.mode = 'IR-REMOTE'
+#ir.mode = 'IR-REMOTE'
 
 tank = MoveTank(OUTPUT_B, OUTPUT_C)
-
+"""
 buttons = [
     (ir.REMOTE.RED_UP, ir.REMOTE.RED_DOWN),
     (ir.REMOTE.BLUE_UP, ir.REMOTE.BLUE_DOWN),
-]
+]"""
 
-def ir_changed(event):
-    for channel in range(2):
-        state = event.evaluation[channel]
-        if state == ir.REMOTE.BAECON_MODE_ON:
-            for m in motors:
-                if m is not None:
-                    m.stop()
-            loop.stop()
-        for button in range(2):
-            n = channel * 2 + button
-            motor = motors[channel * 2 + button]
-            if not motor:
-                pass
-            elif state == buttons[button][0]:
-                motor.run_forever(50)
-            elif state == buttons[button][1]:
-                motor.run_forever(-50)
-            else:
-                motor.stop()
-    
+def top_left_channel_1_action(state):
+    tank.run_forever(50)
 
-loop = EventLoop()
-loop.register_value_change(getter=lambda: ir.remote, 
-                           startvalue=ir.remote,
-                           target=ir_changed)
-loop.start()
+def bot_left_channel_1_action(state):
+    tank.run_forever(50)
+
+def top_right_channel_1_action(state):
+    tank.on_for_degrees(0, SpeedPercent(30), 90)
+
+def bot_right_channel_1_action(state):
+    tank.on_for_degrees(0, SpeedPercent(30), -90)
+
+ir.on_channel1_top_left = top_left_channel_1_action
+ir.on_channel1.bottom_left = bot_left_channel_1_action
+ir.on_channel1.top_right = top_right_channel_1_action
+ir.on_channel1_bottom_right = bot_right_channel_1_action
+def remote():
+    while True:
+        ir.process()
+        time.sleep(0.01)
