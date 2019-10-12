@@ -85,15 +85,39 @@ class LineFollower():
 
 
             found_white = False
-            count = 0
+            count = 4
             while not found_white:
+                left = False
+                left_number = 0
+                count *= 2.5
 
-                lm.run_timed(time_sp=dt, speed_sp=-50, stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=50, stop_action=stop_action)
+                while not left and not found_white:
 
-                if cs.color == 6:
-                    found_white = True
-                count += 1
+                    lm.run_timed(time_sp=dt, speed_sp=-70, stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp=70, stop_action=stop_action)
+
+                    if cs.color == 6:
+                        found_white = True
+
+                    if left_number >= count:
+                        break
+                    
+                    
+                right = False
+                right_number = 0
+                count *= 2.5
+
+                while not right and not found_white:
+
+                    lm.run_timed(time_sp=dt, speed_sp=70, stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp=-70, stop_action=stop_action)
+
+                    if cs.color == 6:
+                        found_white = True
+
+                    if right_number >= count:
+                        break
+
             
 
 
