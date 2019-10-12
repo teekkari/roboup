@@ -43,7 +43,7 @@ class IRUtils:
 
             # do nothing if we havent passed error threshold
             if abs(delta) < ERR_MARGIN or delta == 0.0:
-                time.sleep(0.05) #50ms
+                time.sleep(0.005) #5ms
                 continue
             if sensorOnRightSide:
                 return delta*TURN_CONST
@@ -55,7 +55,7 @@ class IRUtils:
 
     def get_turn_from_dist(self, target_distance):
         TURN_CONST = 5
-        dist = self.get_distance_cm
+        dist = self.get_distance_cm()
         delta = dist - target_distance
 
         return delta*TURN_CONST
