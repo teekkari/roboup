@@ -1,7 +1,7 @@
 from ev3dev2.sensor.lego import InfraredSensor
 from move import Driver
 import time
-import csv
+import pickle
 
 class Remote():
     def __init__(self):
@@ -27,7 +27,8 @@ class Remote():
         print(self.ir.beacon())
         if state:
             print("Beacon pressed, now stopping")
-            self.drive.stop()
+            with open('ghost.pkl', 'wb') as f:
+                pickle.dump(self.ghost, f)
 
     def top_left_channel_1_action(self, state):
         print(self.ir.top_left())
@@ -35,7 +36,7 @@ class Remote():
             self.now = time.time()
             self.drive.move()
         else:
-            print("Time after forward ", time.time() - self.now)
+            self.ghost.append(('forward', time.time() - self.now))
             self.drive.stop()
 
     def bot_left_channel_1_action(self, state):
@@ -44,7 +45,7 @@ class Remote():
             self.now = time.time()
             self.drive.reverse()
         else:
-            print("Time after backward ", time.time() - self.now)
+            self.ghost.append(('backward', time.time() - self.now))
             self.drive.stop()
 
     def top_right_channel_1_action(self, state):
@@ -53,7 +54,7 @@ class Remote():
             self.now = time.time()
             self.drive.turn(100)
         else:
-            print("Time after right ", time.time() - self.now)
+            self.ghost.append(('right', time.time() - self.now))
             self.drive.stop()
 
     def bot_right_channel_1_action(self, state):
@@ -62,7 +63,7 @@ class Remote():
             self.now = time.time()
             self.drive.turn(-100)
         else:
-            print("Time after left ", time.time() - self.now)
+            self.ghost.append(('left', time.time() - self.now))
             self.drive.stop()
 
     def remote(self):

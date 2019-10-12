@@ -55,8 +55,8 @@ class LineFollower():
 
         # PID tuning
         Kp = 1  # proportional gain
-        Ki = 0  # integral gain
-        Kd = 0  # derivative gain
+        Ki = 0.01  # integral gain
+        Kd = 0.01  # derivative gain
 
         target_value = self.correct_value
 
@@ -141,7 +141,5 @@ class LineFollower():
                         Driver().turn_degrees(180)
                         lm.run_timed(time_sp = dt, speed_sp = turn_speed_value, stop_action=stop_action)
                         rm.run_timed(time_sp = dt, speed_sp = turn_speed_value, stop_action=stop_action)
-                        
-                    break
 
                 turn *= -1
