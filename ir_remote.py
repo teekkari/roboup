@@ -1,6 +1,6 @@
 from ev3dev2.sensor.lego import InfraredSensor
 from move import Driver
-
+import time
 
 class Remote():
     def __init__(self):
@@ -38,7 +38,7 @@ class Remote():
     def top_right_channel_1_action(self, state):
         print(self.ir.top_right())
         if state:
-            self.drive.turn(50)
+            self.drive.turn(100)
             print("right")
         else:
             self.drive.stop()
@@ -46,7 +46,7 @@ class Remote():
     def bot_right_channel_1_action(self, state):
         print(self.ir.bottom_right())
         if state:
-            self.drive.turn(-50)
+            self.drive.turn(-100)
             print("left")
         else:
             self.drive.stop()
@@ -54,7 +54,7 @@ class Remote():
     def remote(self):
         try:
             while True:
-                ir.process()
+                self.ir.process()
                 time.sleep(0.01)
         except Exception as e:
             print(e)
