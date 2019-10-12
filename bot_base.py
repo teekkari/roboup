@@ -51,11 +51,13 @@ class Bot:
             while self.ts.is_pressed == 0:
                 d = self.irutils.get_distance_cm()
 
-                while abs(d - target_dist) > 1.5:
+                while abs(d - target_dist) > 1.5 and self.ts.is_pressed == 0:
 
-                    self.driver.turn_degrees(int(d))
+                    print(d, "d")
+
+                    self.driver.turn_degrees(int(d/2))
                     self.driver.move_cm(2)
-                    self.driver.turn_degrees(-int(d))
+                    self.driver.turn_degrees(-int(d/2))
 
                     d = self.irutils.get_distance_cm()
 
