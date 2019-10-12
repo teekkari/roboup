@@ -74,5 +74,7 @@ class LineFollower():
             previous_error = error
 
 
-lineFollower = LineFollower(28, 18, 62)
-lineFollower.run()
+
+if __name__ == "__main__":
+    lineFollower = LineFollower(28, 18, 62)
+    lineFollower.run()
