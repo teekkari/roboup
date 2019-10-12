@@ -65,6 +65,8 @@ class Bot:
                 self.driver.stop()
         elif args[0] == "turn":
             self.driver.turn_degrees(int(args[1]))
+        elif args[0] == "reverse":
+            self.driver.reverse_cm(int(args[1]))
         elif args[0] == "forward":
             if args[1] == "for":
                 self.driver.move_cm(int(args[2]))
