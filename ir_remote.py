@@ -1,6 +1,6 @@
 from ev3dev2.sensor.lego import InfraredSensor
 from move import Driver
-
+import time
 
 class Remote():
     def __init__(self):
@@ -54,7 +54,7 @@ class Remote():
     def remote(self):
         try:
             while True:
-                ir.process()
+                self.ir.process()
                 time.sleep(0.01)
         except Exception as e:
             print(e)
