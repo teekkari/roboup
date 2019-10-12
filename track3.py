@@ -1,7 +1,7 @@
 from move import Driver
 from distance_utils import IRUtils
 
-class Track1:
+class Track3:
 
     def __init__(self):
         self.moveset = [
@@ -44,7 +44,7 @@ class Track1:
 
 
 if __name__=="__main__":
-    t = Track1()
+    t = Track3()
     t.run()
 
             
