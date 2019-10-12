@@ -31,11 +31,11 @@ while True:
         rm = LargeMotor(OUTPUT_C)
 
         lm.on(30)
-        rm.on(20)
+        rm.on(23)
         
     if distance_from_wall > max_distance:
 
-        lm.on(20)
+        lm.on(23)
         rm.on(30)
 
     if cs.color == 6:
@@ -45,8 +45,10 @@ lineFollower = LineFollower(60, 20, 90)
 value = lineFollower.run(4)
 
 if value == 10000:
+    driver.move_seconds(0.5)
     sleep(7)
     
     driver.turn_degrees(180)
-
+    driver.move_seconds(0.5)
+    
     lineFollower.run(100)
