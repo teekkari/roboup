@@ -26,7 +26,7 @@ import time
 
 class Bot:
 
-    def __init__(self):
+    def __init__(self, IRSensorsOnRightSide):
         self.driver = Driver()
         self.irutils = IRUtils()
         #self.ts = TouchSensor()
