@@ -116,9 +116,6 @@ class LineFollower():
 
                 while not found_white:
 
-                    if cs.color == target_color:
-                        break
-
                     lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
 
