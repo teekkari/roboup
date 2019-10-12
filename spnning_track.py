@@ -8,9 +8,10 @@ class Spin():
     def __init__(self):
         self.drive = Driver()
         self.sensor = ColorSensor()
-        self.sensor.mode = 'COL_COLOR'
+        
     
     def go():
+        self.sensor.mode = 'COL-COLOR'
         try:
             self.drive.set_speed(90)
             time = time.time()
