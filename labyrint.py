@@ -93,7 +93,10 @@ class LineFollower():
                     rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
 
                     if cs.color == 6:
+                        lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
+                        rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
                         found_white = True
+                        break
 
                     if left_number >= count:
                         break
