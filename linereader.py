@@ -60,10 +60,10 @@ class LineFollower:
             # run motors
             if u < 0:
                 lm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
-                rm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
+                rm.run_timed(time_sp=dt, speed_sp=0, stop_action=stop_action)
                 sleep(dt / 1000)
             else:
-                lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
+                lm.run_timed(time_sp=dt, speed_sp=0, stop_action=stop_action)
                 rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
                 sleep(dt / 1000)
 
