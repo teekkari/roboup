@@ -1,7 +1,7 @@
-from ev3dev2.motor import Motor, OUTPUT_B, OUTPUT_C, OUTPUT_D, MoveTank, SpeedPercent
+from ev3dev2.motor import Motor, OUTPUT_B, OUTPUT_C, MoveTank, SpeedPercent
 from ev3dev2.sensor.lego import InfraredSensor
 
-ir = InfraredSensor(OUTPUT_D)
+ir = InfraredSensor()
 ir.mode = 'IR-REMOTE'
 
 tank = MoveTank(OUTPUT_B, OUTPUT_C)
