@@ -12,25 +12,8 @@ rm = LargeMotor(OUTPUT_C)
 driver = Driver()
 
 driver.set_speed(70)
-driver.move_seconds(3)
+driver.back_seconds(12)
 
-driver.reverse()
-cs = ColorSensor()
-
-driver.stop()
-
-driver.turn_degrees(-90)
-
-driver.back_seconds(3)
-
-driver.move_seconds(0.2)
-
-driver.turn_degrees(90)
-
-driver.back_seconds(3)
-driver.move_seconds(0.2)
-
-driver.turn_degrees(-90)
 
 
 
