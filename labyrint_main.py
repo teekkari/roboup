@@ -119,7 +119,8 @@ class LineFollower():
 
                     lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
-
+                    
+                    print(cs.color)
                     if cs.color == 6:
                         lm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
                         rm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
@@ -130,16 +131,6 @@ class LineFollower():
                         break
                     
                     left_number += 1
-
-                    if cs.color == target_color:
-                        x = 1
-
-                        while cs.color == target_color:
-                            x += 1
-
-                            if x > 10:
-                                return 10000
-                
 
                 turn *= -1
 
