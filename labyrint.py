@@ -39,10 +39,10 @@ class LineFollower():
         factor_positive = (self.too_light - self.correct_value) / 100
         factor = (self.too_light - self.correct_value) / (self.correct_value - self.too_dark)
 
-        turn_speed = 10
-
         # if value is 0 turned to left last
-        last_turn = 1
+        turn = -1
+
+        turn_speed = 150
 
         while not self.end:
             measured_value = cs.value()
@@ -69,6 +69,7 @@ class LineFollower():
                     else:
                         u = speed - 1000
 
+                print(speed)
                 if u < 0:
                     lm.run_timed(time_sp=dt, speed_sp=speed - abs(u), stop_action=stop_action)
                     rm.run_timed(time_sp=dt, speed_sp=speed + abs(u), stop_action=stop_action)
@@ -85,7 +86,11 @@ class LineFollower():
 
 
             found_white = False
-            count = 4
+            count = 15  
+
+            # if white was on left it is -1 
+
+
             while not found_white:
                 left = False
                 left_number = 0
@@ -93,8 +98,8 @@ class LineFollower():
 
                 while not left and not found_white:
 
-                    lm.run_timed(time_sp=dt, speed_sp=-70, stop_action=stop_action)
-                    rm.run_timed(time_sp=dt, speed_sp=70, stop_action=stop_action)
+                    lm.run_timed(time_sp=dt, turn_speed= turn * turn_speed, stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, turn_speed= -1 * turn * turn_speed, stop_action=stop_action)
 
                     if cs.color == 6:
                         found_white = True
@@ -103,25 +108,7 @@ class LineFollower():
                         break
                     
                     left_number += 1
-                    
-                right = False
-                right_number = 0
-                count *= 2.5
-
-                while not right and not found_white:
-
-                    lm.run_timed(time_sp=dt, speed_sp=70, stop_action=stop_action)
-                    rm.run_timed(time_sp=dt, speed_sp=-70, stop_action=stop_action)
-
-                    if cs.color == 6:
-                        found_white = True
-
-                    if right_number >= count:
-                        break
-
-                    right_number += 1
-
-            
+                    turn *= -1
 
 
 lineFollower = LineFollower(60, 20, 90)
