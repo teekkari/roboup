@@ -37,5 +37,5 @@ class Driver:
         steering = 100 if degrees > 0 else -100
         self.driver.on_for_degrees(steering, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
 
-    def turn_seconds(self, seconds):
+    def move_seconds(self, seconds):
         self.driver.on_for_seconds(0, self.speed, seconds)
