@@ -26,7 +26,7 @@ def run_bot():
     drive_obj = MoveTank(OUTPUT_B, OUTPUT_C)
     cs = ColorSensor()
     drop_dens()
-    remote()
+    #remote()
     cs.mode = 'COL-COLOR'
     end = True
     while end:
