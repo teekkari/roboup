@@ -43,7 +43,7 @@ class LineFollower():
         last_turn = 1
 
         while not self.end:
-                        error = target_value - cs.value()
+            error = target_value - cs.value()
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
