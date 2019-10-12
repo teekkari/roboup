@@ -98,8 +98,8 @@ class LineFollower():
 
                 while not left and not found_white:
 
-                    lm.run_timed(time_sp=dt, turn_speed= turn * turn_speed_value, stop_action=stop_action)
-                    rm.run_timed(time_sp=dt, turn_speed= -1 * turn * turn_speed_value, stop_action=stop_action)
+                    lm.run_timed(time_sp=dt, speed_sp = turn * turn_speed_value, stop_action=stop_action)
+                    rm.run_timed(time_sp=dt, speed_sp = -1 * turn * turn_speed_value, stop_action=stop_action)
 
                     if cs.color == 6:
                         found_white = True
