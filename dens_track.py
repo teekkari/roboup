@@ -6,8 +6,8 @@ class Dens(Bot):
         super().__init__(False)
 
         self.moveset = [
-            "find 20",
-            "hold 20",
+            "find 10",
+            "hold 10",
         ]
 
         self.moveset2 = [
