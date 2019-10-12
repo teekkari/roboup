@@ -6,7 +6,7 @@
 from ev3dev2.motor import LargeMotor, OUTPUT_B, OUTPUT_C, SpeedPercent, MoveTank
 from ev3dev2.sensor.lego import ColorSensor
 from drop_dens import drop_dens
-from ir_remote import remote
+#from ir_remote import remote
 from linereader import LineFollower
 
 from distance_utils import IRUtils
