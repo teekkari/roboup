@@ -100,6 +100,7 @@ class Bot:
         if new_dist < dist:
             while new_dist < dist:
                 self.driver.turn_degrees(TURN_AMT)
+                time.sleep(0.5)
                 dist = new_dist
                 new_dist = self.irutils.get_distance_cm()
 
@@ -108,6 +109,7 @@ class Bot:
             new_dist, dist = dist, new_dist #swap vars
             while new_dist < dist:
                 self.driver.turn_degrees(-TURN_AMT)
+                time.sleep(0.5)
                 dist = new_dist
                 new_dist = self.irutils.get_distance_cm()
             
