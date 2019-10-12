@@ -44,8 +44,6 @@ class LineFollower:
         while not self.shut_down:
             measured_value = cs.value()
 
-
-            color = cs.color()
             # Calculate steering using PID algorithm
 
             error = target_value - measured_value
