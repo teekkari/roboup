@@ -10,6 +10,9 @@ class Driver:
     def set_speed(self, speed):
         self.speed = max(-100, max(100, speed))
 
+    def get_speed(self):
+        return self.speed
+
     
     def move(self):
         self.driver.on(0, SpeedPercent(self.speed))
@@ -42,8 +45,7 @@ class Driver:
 
     def turn_degrees(self, degrees):
         TRANSFORM_CONST = 4.4
-        steering = 100 if degrees > 0 else -100
-        self.driver.on_for_degrees(steering, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
+        self.driver.on_for_degrees(100, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
 
     def turn_neg_degrees(self, degrees):
         TRANSFORM_CONST = 4.4
@@ -52,3 +54,6 @@ class Driver:
 
     def move_seconds(self, seconds):
         self.driver.on_for_seconds(0, self.speed, seconds)
+
+    def back_seconds(self, seconds):
+        self.driver.on_for_seconds(0, -self.speed, seconds)

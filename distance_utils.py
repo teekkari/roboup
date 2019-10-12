@@ -60,6 +60,10 @@ class IRUtils:
         return 0
 
 
+    def distance_delta(self, target_distance):
+        return self.get_distance_cm() - target_distance
+
+
     def get_turn_from_dist(self, target_distance):
         TURN_CONST = 0.5
         dist = self.get_distance_cm()
