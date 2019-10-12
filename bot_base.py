@@ -55,6 +55,7 @@ class Bot:
                 d = self.irutils.distance_delta(target_dist)
 
                 if abs(d) > 3:
+                    print("turn")
                     if self.IRSensorsOnRightSide:
                         self.driver.turn_degrees(int(d))
                     else:
