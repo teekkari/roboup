@@ -33,7 +33,7 @@ class Track1:
 
                 if d == 0: # bump
                     break
-                elif abs(d) > (target_dist + 10): # gap encountered
+                elif abs(d) > (target_dist + 5): # gap encountered
                     break
 
                 self.driver.stop()
