@@ -6,9 +6,7 @@ class Dens(Bot):
         super().__init__()
 
         self.moveset = [
-            "forward for 20",
-            "turn 90",
-            "reverse 10"
+            "forward for 30"
         ]
 
         self.moveset2 = [
