@@ -109,7 +109,7 @@ class LineFollower():
                 self.end = True
 
 
-        return [cs.value(), cs.color()]
+        return [cs.value(), cs.color]
 
 
     def find_white_line(self):
@@ -153,6 +153,13 @@ class LineFollower():
         return turn
 
     def button_find(self):
+        cs = ColorSensor()
+
+        values = []
+        for x in range(1,20):
+            values.append(cs.color)
+
+        print(values) 
         driver = Driver()
         driver.move_seconds(0.5)
 
