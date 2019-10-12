@@ -22,7 +22,7 @@ class Remote():
         print(self.ir.beacon())
         if state:
             print("Beacon pressed, now stopping")
-            with open(self.name + 'pkl', 'wb') as f:
+            with open(self.name + '.pkl', 'wb') as f:
                 pickle.dump(self.ghost, f)
 
     def top_left_channel_1_action(self, state):

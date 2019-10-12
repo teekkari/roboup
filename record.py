@@ -15,6 +15,7 @@ class Record():
     def play(self):
         print(len(self.ghost))
         for move in self.ghost:
+            time.sleep(0.3)
             now = time.time()
             if move[0] == 'forward':
                 self.driver.move()
