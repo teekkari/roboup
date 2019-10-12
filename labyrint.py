@@ -1,3 +1,4 @@
+
 from ev3dev2.motor import LargeMotor, MediumMotor, SpeedPercent, OUTPUT_C, OUTPUT_B, MoveTank
 from ev3dev2.motor import MoveDifferential
 from ev3dev2.sensor.lego import ColorSensor
@@ -15,8 +16,8 @@ driver.set_speed(30)
 
 driver.move()
 
-safe_threshold = 10
-max_distance = 14
+safe_threshold = 15
+max_distance = 17
 
 lm = LargeMotor(OUTPUT_B)
 rm = LargeMotor(OUTPUT_C)
