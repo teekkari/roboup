@@ -6,7 +6,8 @@ class Track1:
     def __init__(self):
         self.moveset = [
             "find 5",
-            "hold 5"
+            "hold 5",
+            "reverse 5",
         ]
 
         self.driver = Driver()
