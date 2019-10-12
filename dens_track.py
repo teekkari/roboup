@@ -3,6 +3,8 @@ from bot_base import Bot
 class Dens(Bot):
     def __init__(self):
 
+        super().__init__()
+
         self.moveset = [
             "forward for 20",
             "turn 90",
