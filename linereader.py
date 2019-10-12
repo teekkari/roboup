@@ -41,6 +41,10 @@ class LineFollower:
 
             # Calculate steering using PID algorithm
             error = target_value - cs.value()
+
+            if previous_error > 0 and error < 0:
+                integral = 0
+
             integral += (error * dt)
             derivative = (error - previous_error) / dt
 
