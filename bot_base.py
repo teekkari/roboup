@@ -59,9 +59,9 @@ class Bot:
                     print("turn", d)
                     self.driver.stop()
                     if self.IRSensorsOnRightSide:
-                        self.driver.turn_degrees(int(d))
+                        self.driver.turn_degrees(-int(d*2))
                     else:
-                        self.driver.turn_degrees(-int(d))
+                        self.driver.turn_degrees(int(d*2))
                     time.sleep(1)
 
                 print("move")
