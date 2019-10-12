@@ -7,6 +7,7 @@ from ev3dev2.sensor.lego import ColorSensor
 from time import sleep
 from move import Driver
 from distance_utils import IRUtils
+from move import Driver
 
 class LineFollower():
     def __init__(self, correct_value, too_dark, too_light):
@@ -134,6 +135,13 @@ class LineFollower():
 
                 if count > 200:
 
-                    print("jees")
+                    if cs.color == 4:
+                        lm.run_timed(time_sp = dt, speed_sp = turn_speed_value, stop_action=stop_action)
+                        rm.run_timed(time_sp = dt, speed_sp = turn_speed_value, stop_action=stop_action)
+                        Driver().turn_degrees(180)
+                        lm.run_timed(time_sp = dt, speed_sp = turn_speed_value, stop_action=stop_action)
+                        rm.run_timed(time_sp = dt, speed_sp = turn_speed_value, stop_action=stop_action)
+                        
+                    break
 
                 turn *= -1
