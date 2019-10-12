@@ -38,14 +38,15 @@ while True:
         lm.on(20)
         rm.on(30)
 
-    if cs.color == 6
+    if cs.color == 6:
         break
 
 lineFollower = LineFollower(60, 20, 90)
-lineFollower.run(4)
+value = lineFollower.run(4)
 
-distance_from_wall = utils.get_distance_cm()
+if value == 10000:
+    sleep(7)
+    
+    driver.turn_degrees(180)
 
-driver.turn_degrees(-90)
-
-lineFollower.run(100)
+    lineFollower.run(100)

@@ -130,10 +130,17 @@ class LineFollower():
                         break
                     
                     left_number += 1
+
+                    if cs.color == target_color:
+                        x = 1
+
+                        while cs.color == target_color:
+                            x += 1
+
+                            if x > 10:
+                                return 10000
                 
 
                 turn *= -1
 
-        
-            if cs.color == target_color:
                 break
