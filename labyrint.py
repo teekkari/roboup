@@ -114,7 +114,7 @@ start_dist = IRUtils().get_distance_cm()
 
 cs = ColorSensor()
 driver = Driver()
-driver.set_speed(600)
+driver.set_speed(70)
 
 driver.move()
 
