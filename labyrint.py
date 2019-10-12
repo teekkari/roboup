@@ -15,8 +15,8 @@ driver.set_speed(30)
 
 driver.move()
 
-safe_threshold = 20
-max_distance = 21
+safe_threshold = 15
+max_distance = 16
 
 lm = LargeMotor(OUTPUT_B)
 rm = LargeMotor(OUTPUT_C)
