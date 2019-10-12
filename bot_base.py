@@ -86,7 +86,7 @@ class Bot:
 
 
     def seek_wall_parallel(self):
-        TURN_AMT = 3
+        TURN_AMT = 6
 
         old_speed = self.driver.get_speed()
         self.driver.set_speed(10)
