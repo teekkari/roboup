@@ -50,6 +50,8 @@ class Bot:
             time.sleep(float(args[1]))
         elif args[0] == "stop":
             self.driver.stop()
+        elif args[0] == "setspeed":
+            self.driver.set_speed(int(args[1]))
         elif args[0] == "hold":
             target_dist = int(args[1])
             counter = 0
