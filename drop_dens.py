@@ -21,5 +21,6 @@ def free_dens():
 
 def stop_dens():
     med_motor.stop_action = 'hold'
+    med_motor.command = 'stop'
 
 
