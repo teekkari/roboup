@@ -11,7 +11,7 @@ class Dens(Bot):
             "setspeed 35",
             "forward for 30",
             "setspeed 20",
-            "turn -20"
+            "turn -20",
             "find 13",
             "setspeed 30",
             "forward for 50",
