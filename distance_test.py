@@ -1,16 +1,15 @@
 from distance_utils import IRUtils
 from bot_base import Bot
 
+from drop_dens import read_dens
+
 import time
 
 if __name__=="__main__":
     ir = IRUtils()
 
-    bot = Bot(False)
-
-    bot.driver.turn_degrees(45)
-
-    bot.driver.turn_degrees(-90)
+    read_dens()
+    
 
 
     #bot.seek_wall_parallel()
