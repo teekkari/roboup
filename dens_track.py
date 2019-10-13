@@ -18,7 +18,7 @@ class Dens(Bot):
             "turn 8",
             "sleep 0.5",
             "setspeed 25",
-            "forward for 6",
+            "forward for 60",
             "setspeed 15",
             "turn 160",
             "setspeed 20",
