@@ -4,7 +4,7 @@ from ev3dev2.motor import LargeMotor, OUTPUT_B, OUTPUT_C, SpeedPercent, MoveStee
 class Driver:
     def __init__(self):
         self.driver = MoveSteering(OUTPUT_B, OUTPUT_C)
-        self.speed = 40
+        self.speed = 20
 
 
     def set_speed(self, speed):
@@ -44,11 +44,11 @@ class Driver:
         self.driver.on_for_rotations(steering, SpeedPercent(self.speed), rotations)
 
     def turn_degrees(self, degrees):
-        TRANSFORM_CONST = 4.1
+        TRANSFORM_CONST = 4.0
         self.driver.on_for_degrees(100, SpeedPercent(self.speed), degrees * TRANSFORM_CONST)
 
     def turn_neg_degrees(self, degrees):
-        TRANSFORM_CONST = 4.1
+        TRANSFORM_CONST = 4.0
         steering = 100 if degrees > 0 else -100
         self.driver.on_for_degrees(steering, SpeedPercent(self.speed), -degrees * TRANSFORM_CONST)
 
