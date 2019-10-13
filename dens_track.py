@@ -27,6 +27,7 @@ class Dens(Bot):
             "turn -95",
             "reverse 15",
             "forward for 3",
+            "sleep 0.2",
             "turn 5",
             "seekwall",
             "forward until gap",
