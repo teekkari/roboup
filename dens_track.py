@@ -13,12 +13,12 @@ class Dens(Bot):
             "setspeed 25",
             "forward for 60",
             "setspeed 15",
-            "turn 180",
+            "turn 175",
             "setspeed 20",
             "reverse 40",
             "forward for 7",
             "turn -95",
-            "reverse 5",
+            "reverse 7",
             "seekwall",
             "forward until gap",
             "forward for 20",
@@ -31,7 +31,7 @@ class Dens(Bot):
             "dens lift",
             "reverse 15",
             "sleep 1",
-            "turn 45",
+            "turn 50",
             "sleep 0.5",
             "forward for 55"
         ]
