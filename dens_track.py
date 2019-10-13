@@ -21,7 +21,8 @@ class Dens(Bot):
             "seekwall",
             "forward until gap",
             "forward for 20",
-            #"turn -5",
+            "sleep 0.2",
+            "turn -5",
             "sleep 0.2",
             "dens drop",
             "reverse 8",
@@ -31,7 +32,7 @@ class Dens(Bot):
             "sleep 1",
             "turn 40",
             "sleep 0.5",
-            "forward for 45"
+            "forward for 55"
         ]
 
         self.b = [
