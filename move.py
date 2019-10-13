@@ -4,7 +4,7 @@ from ev3dev2.motor import LargeMotor, OUTPUT_B, OUTPUT_C, SpeedPercent, MoveStee
 class Driver:
     def __init__(self):
         self.driver = MoveSteering(OUTPUT_B, OUTPUT_C)
-        self.speed = 20
+        self.speed = 40
 
 
     def set_speed(self, speed):
