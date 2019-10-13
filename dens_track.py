@@ -12,12 +12,14 @@ class Dens(Bot):
             "forward for 25",
             "setspeed 20",
             "turn -25",
-            "find 13",
+            "find 10",
             "sleep 1",
             "setspeed 30",
-            "forward for 50",
+            "forward for 60",
             "turn 180",
-            "reverse 20"
+            "reverse 25",
+            "forward 10",
+            "turn -90"
         ]
 
         self.b = [
