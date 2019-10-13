@@ -12,6 +12,8 @@ if __name__=="__main__":
 
     drop_dens.stop_dens()
 
+    drop_dens.drop_dens()
+
     
 
     

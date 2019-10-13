@@ -6,24 +6,12 @@ class Dens(Bot):
         super().__init__(False)
 
         self.moveset = [
-            "find 10",
-            "hold 10",
-        ]
-
-        self.moveset2 = [
-            "forward for 50",
+            "forward 20",
             "turn -20",
-            "find 5",
-            "hold 5",
-            "reverse 30",
-            "turn 90",
-            "forward until color 6", #foward until color 6 white
-            "dropdens",
-            "turn 90",
-            "sleep 5"
-            "forward until wall", # forward until wall
-            "turn -90",
-            "forward until finish" #forward until finish
+            "find 10",
+            "forward 60",
+            "turn 180",
+            "backward 15"
         ]
 
     def run(self):
