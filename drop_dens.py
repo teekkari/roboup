@@ -9,8 +9,8 @@ def drop_dens():
     med_motor.on_for_degrees(SpeedPercent(95), -90)
 
 
-def setup_dens():
-    pass
+def setup_dens(val):
+    med_motor.position = val
 
 def read_dens():
     print(med_motor.position)
