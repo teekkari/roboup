@@ -10,7 +10,7 @@ if __name__=="__main__":
 
     bot = Bot(False)
 
-    bot.driver.turn_degrees(90)
+    bot.driver.set_speed(50)
 
     drop_dens.stop_dens()
 
