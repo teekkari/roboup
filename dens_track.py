@@ -16,11 +16,20 @@ class Dens(Bot):
             "sleep 1",
             "setspeed 30",
             "forward for 65",
+            "setspeed 20",
             "turn 180",
             "reverse 30",
-            "forward 13",
+            "forward for 10",
             "turn -90",
-            "forward 35"
+            "seekwall",
+            "forward for 35",
+            "dens drop",
+            "reverse 8",
+            "sleep 1",
+            "dens lift",
+            "sleep 8",
+            "turn 20",
+            "forward for 15"
         ]
 
         self.b = [
