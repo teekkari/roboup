@@ -101,10 +101,18 @@ class Bot:
                     pass # touch sensor pressed
                 elif args[2] == "finish":
                     pass # idk lol
+                elif args[2] == "gap":
+                    d = self.irutils.get_distance_cm()
+                    self.driver.move()
+
+                    while self.irutils.get_distance_cm() - d < 10:
+                        time.sleep(0.01)
+                    
+                    self.driver.stop()
 
 
     def seek_wall_parallel(self):
-        TURN_AMT = 6
+        TURN_AMT = 5.0
 
         old_speed = self.driver.get_speed()
         self.driver.set_speed(10)
