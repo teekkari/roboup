@@ -15,4 +15,10 @@ def setup_dens(val):
 def read_dens():
     print(med_motor.position)
 
+def free_dens():
+    med_motor.stop_action = 'brake'
+
+def stop_dens():
+    med_motor.stop_action = 'hold'
+
 
