@@ -8,10 +8,10 @@ class Dens(Bot):
         self.moveset = [
             "forward for 30",
             "seekwall",
-            "turn 5",
+            "turn 8",
             "sleep 0.5",
             "setspeed 25",
-            "forward for 65",
+            "forward for 6",
             "setspeed 15",
             "turn 160",
             "setspeed 20",
