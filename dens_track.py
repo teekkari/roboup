@@ -13,15 +13,15 @@ class Dens(Bot):
         time.sleep(2)
 
         self.moveset = [
+            "setspeed 20",
             "forward for 30",
             "seekwall",
             "turn 8",
             "sleep 0.5",
-            "setspeed 25",
+            "setspeed 100",
             "forward for 60",
-            "setspeed 15",
             "turn 160",
-            "setspeed 20",
+            #"setspeed 20",
             "reverse 45",
             "forward for 7",
             "turn -95",
@@ -44,7 +44,8 @@ class Dens(Bot):
             "sleep 1",
             "turn 50",
             "sleep 0.5",
-            "forward for 65"
+            "forward for 65",
+            "setspeed 40"
         ]
 
         self.b = [
