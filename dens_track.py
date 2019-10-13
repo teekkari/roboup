@@ -28,8 +28,8 @@ class Dens(Bot):
             "sleep 1",
             "dens lift",
             "sleep 8",
-            "turn 20",
-            "forward for 15"
+            "turn 35",
+            "forward for 40"
         ]
 
         self.b = [
