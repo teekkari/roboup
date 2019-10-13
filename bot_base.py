@@ -4,6 +4,7 @@ from ev3dev2.sensor.lego import ColorSensor, TouchSensor
 
 import time
 import math
+import drop_dens
 
 #### commands
 # forward
@@ -46,7 +47,7 @@ class Bot:
         elif args[0] == "seekwall":
             self.seek_wall_parallel()
         elif args[0] == "sleep":
-            time.sleep(int(args[1]))
+            time.sleep(float(args[1]))
         elif args[0] == "stop":
             self.driver.stop()
         elif args[0] == "hold":
@@ -75,6 +76,11 @@ class Bot:
 
         elif args[0] == "turn":
             self.driver.turn_degrees(int(args[1]))
+        elif args[0] == "dens":
+            if args[1] == "drop":
+                drop_dens.drop_dens()
+            elif args[1] == "lift":
+                drop_dens.lift_dens()
         elif args[0] == "reverse":
             self.driver.reverse_cm(int(args[1]))
         elif args[0] == "forward":
