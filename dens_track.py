@@ -31,7 +31,7 @@ class Dens(Bot):
             "dens lift",
             "reverse 15",
             "sleep 1",
-            "turn 40",
+            "turn 45",
             "sleep 0.5",
             "forward for 55"
         ]
