@@ -11,11 +11,11 @@ class Dens(Bot):
             "turn 5",
             "sleep 0.5",
             "setspeed 25",
-            "forward for 60",
+            "forward for 65",
             "setspeed 15",
             "turn 160",
             "setspeed 20",
-            "reverse 40",
+            "reverse 45",
             "forward for 7",
             "turn -95",
             "reverse 7",
@@ -33,7 +33,7 @@ class Dens(Bot):
             "sleep 1",
             "turn 50",
             "sleep 0.5",
-            "forward for 55"
+            "forward for 65"
         ]
 
         self.b = [
