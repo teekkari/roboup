@@ -6,7 +6,11 @@ class Dens(Bot):
         super().__init__(False)
 
         self.moveset = [
-            "forward until gap"
+            "forward for 60",
+            "turn -20",
+            "dens drop",
+            "reverse 8",
+            "dens lift"
         ]
 
     def run(self):
