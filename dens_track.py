@@ -1,9 +1,16 @@
 from bot_base import Bot
+from drop_dens import stop_dens
+
+import time
 
 class Dens(Bot):
     def __init__(self):
 
         super().__init__(False)
+
+        stop_dens()
+        print("dens stop")
+        time.sleep(2)
 
         self.moveset = [
             "forward for 30",
