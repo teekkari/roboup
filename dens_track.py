@@ -7,12 +7,13 @@ class Dens(Bot):
 
         self.moveset = [
             "forward for 25",
-            "turn 15",
+            "turn 25",
             "setspeed 35",
-            "forward for 30",
+            "forward for 25",
             "setspeed 20",
-            "turn -20",
+            "turn -25",
             "find 13",
+            "sleep 1",
             "setspeed 30",
             "forward for 50",
             "turn 180",
