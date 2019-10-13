@@ -25,7 +25,7 @@ class Dens(Bot):
             "reverse 45",
             "forward for 7",
             "turn -95",
-            "reverse 10",
+            "reverse 15",
             "forward for 3",
             "turn 5",
             "seekwall",
