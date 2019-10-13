@@ -9,6 +9,7 @@ class Remote():
         self.ir = InfraredSensor()
         self.ir.mode = 'IR-REMOTE'
         self.drive = Driver()
+        self.drive.set_speed(30)
         self.ir.on_channel1_beacon = self.beacon_channel_1_action
         self.ir.on_channel1_top_left = self.top_left_channel_1_action
         self.ir.on_channel1_bottom_left = self.bot_left_channel_1_action
