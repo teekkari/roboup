@@ -10,15 +10,7 @@ if __name__=="__main__":
 
     bot = Bot(False)
 
-    drop_dens.read_dens()
-
-    drop_dens.stop_dens()
-
-    drop_dens.drop_dens()
-
-    bot.driver.reverse_cm(5)
-
-    drop_dens.lift_dens()
+    bot.driver.turn_degrees(-90)
 
     
 
