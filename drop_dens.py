@@ -16,7 +16,7 @@ def read_dens():
     print(med_motor.position)
 
 def free_dens():
-    med_motor.stop(brake=True)
+    med_motor.stop(stop_type='hold')
 
 def stop_dens():
     med_motor.stop_action = 'hold'
