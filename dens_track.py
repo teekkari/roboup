@@ -8,20 +8,16 @@ class Dens(Bot):
 
         super().__init__(False)
 
-        stop_dens()
-        print("dens stop")
-        time.sleep(2)
-
         self.moveset = [
             "setspeed 20",
             "forward for 30",
             "seekwall",
-            "turn 8",
+            "turn 5",
             "sleep 0.5",
-            "setspeed 100",
-            "forward for 60",
-            "turn 160",
-            #"setspeed 20",
+            "setspeed 30",
+            "forward for 65",
+            "turn 150",
+            "setspeed 30",
             "reverse 45",
             "forward for 7",
             "turn -95",
@@ -31,6 +27,8 @@ class Dens(Bot):
             "sleep 0.2",
             "turn 3",
             "seekwall",
+            "setspeed 20",
+            "sleep 0.5",
             "forward until gap",
             "forward for 20",
             "sleep 0.2",
@@ -42,7 +40,7 @@ class Dens(Bot):
             "dens lift",
             "reverse 15",
             "sleep 1",
-            "turn 50",
+            "turn 40",
             "sleep 0.5",
             "forward for 65",
             "setspeed 40"
