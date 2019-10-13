@@ -10,7 +10,7 @@ class Record():
         with open(self.name + '.pkl', 'rb') as f:
             self.ghost = pickle.load(f)
         self.driver = Driver()
-        self.driver.set_speed(30)
+        self.driver.set_speed(20)
     
 
     def play(self):
