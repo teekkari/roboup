@@ -16,7 +16,7 @@ We managed to complete the track, but not with full automation. There were 5 tra
 
 Two of the tracks were done with recorded movement, which qualified as automated.
 
-One of the automated tracks was made using a premade moveset. I built a tree-like moveset parser with some common actions for the robot, but due to time limitations we ended up using it in only one of the tracks. One of the moveset commands was to level the bot with a wall on its left to help guide the movement.
+One of the automated tracks was made using a premade moveset. I built a tree-like moveset parser (bot_base.py) with some common actions for the robot, but due to time limitations we ended up using it in only one of the tracks. One of the moveset commands was to level the bot with a wall on its left to help guide the movement.
 
 ### Problems and solutions
 
